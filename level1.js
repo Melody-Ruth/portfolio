@@ -134,10 +134,10 @@ var darkness, darkness2, waterDarkness;
 
 //Load all of the images used in the game
 function preload() {
-	crystal = loadImage("crystal.png", pic => print(pic), loadImgErrFix);
-	crystalGroup = loadImage("crystal_group2.png", pic => print(pic), loadImgErrFix);
-	crystalGroupWater = loadImage("crystal_group_water.png", pic => print(pic), loadImgErrFix);
-	crystalWater = loadImage("crystal_water.png", pic => print(pic), loadImgErrFix);
+	crystal = loadImage("crystal_low_res.png", pic => print(pic), loadImgErrFix);
+	crystalGroup = loadImage("crystal_group2_low_res.png", pic => print(pic), loadImgErrFix);
+	crystalGroupWater = loadImage("crystal_group_water_low_res.png", pic => print(pic), loadImgErrFix);
+	crystalWater = loadImage("crystal_water_low_res.png", pic => print(pic), loadImgErrFix);
 	darkness = loadImage("darkness1.png", pic => print(pic), loadImgErrFix);
 	darkness2 = loadImage("darkness2.png", pic => print(pic), loadImgErrFix);
 	waterDarkness = loadImage("water_darkness.png", pic => print(pic), loadImgErrFix);
