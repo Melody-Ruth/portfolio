@@ -134,23 +134,21 @@ var darkness, darkness2, waterDarkness;
 
 //Load all of the images used in the game
 function preload() {
-	testing = loadImage("test_image.png");
-	smiley = loadImage("smiley.png");
-	crystal = loadImage("crystal.png");
-	crystalGroup = loadImage("crystal_group2.png");
-	crystalGroupWater = loadImage("crystal_group_water.png");
-	crystalWater = loadImage("crystal_water.png");
-	darkness = loadImage("darkness1.png");
-	darkness2 = loadImage("darkness2.png");
-	waterDarkness = loadImage("water_darkness.png");
+	crystal = loadImage("crystal_low_res.png", pic => print(pic), loadImgErrFix);
+	crystalGroup = loadImage("crystal_group2_low_res.png", pic => print(pic), loadImgErrFix);
+	crystalGroupWater = loadImage("crystal_group_water_low_res.png", pic => print(pic), loadImgErrFix);
+	crystalWater = loadImage("crystal_water_low_res.png", pic => print(pic), loadImgErrFix);
+	darkness = loadImage("darkness1.png", pic => print(pic), loadImgErrFix);
+	darkness2 = loadImage("darkness2.png", pic => print(pic), loadImgErrFix);
+	waterDarkness = loadImage("water_darkness.png", pic => print(pic), loadImgErrFix);
 	
 	//Load the water crystal group images. They each need to load their own so that manipulating one won't affect the others.
 	for (var i = 0; i < 23; i++) {
-		crystalImages[i] = loadImage("crystal_group_water.png"/*, pic => print(pic), loadImgErrFix*/);
+		crystalImages[i] = loadImage("crystal_group_water.png", pic => print(pic), loadImgErrFix);
 	}
 	//Load the water crystal images. They each need to load their own so that manipulating one won't affect the others.
-	for (var i = 0; i < 9; i++) {
-		singleCrystalImages[i] = loadImage("crystal_water.png"/*, pic => print(pic), loadImgErrFix*/);
+	for (var i = 0; i < 8; i++) {
+		singleCrystalImages[i] = loadImage("crystal_water.png", pic => print(pic), loadImgErrFix);
 	}
 }
 
@@ -1425,11 +1423,11 @@ angleMode(DEGREES);
 	}
 	ball.drawIt(255);
 	if (yTranslate > -500) {
-		//image(darkness2,-xTranslate,-100,1200,1500);
+		image(darkness2,-xTranslate,-100,1200,1500);
 	} else if (ball.fullySubmerged) {
-		//image(waterDarkness, -xTranslate,-yTranslate,600,600);
+		image(waterDarkness, -xTranslate,-yTranslate,600,600);
 	} else {
-		//image(darkness,ball.p[0]-600,ball.p[1]-600,1200,1200);
+		image(darkness,ball.p[0]-600,ball.p[1]-600,1200,1200);
 	}
 	for (var i = 0; i < crystals.length; i++) {
 		crystals[i].drawIt();
