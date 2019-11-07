@@ -144,11 +144,11 @@ function preload() {
 	
 	//Load the water crystal group images. They each need to load their own so that manipulating one won't affect the others.
 	for (var i = 0; i < 23; i++) {
-		crystalImages[i] = loadImage("crystal_group_water.png", pic => print(pic), loadImgErrFix);
+		crystalImages[i] = loadImage("crystal_group_water_low_res.png", pic => print(pic), loadImgErrFix);
 	}
 	//Load the water crystal images. They each need to load their own so that manipulating one won't affect the others.
 	for (var i = 0; i < 8; i++) {
-		singleCrystalImages[i] = loadImage("crystal_water.png", pic => print(pic), loadImgErrFix);
+		singleCrystalImages[i] = loadImage("crystal_water_low_res.png", pic => print(pic), loadImgErrFix);
 	}
 }
 
