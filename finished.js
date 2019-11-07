@@ -1225,8 +1225,8 @@ var newCrystal = function(x,y,s,type,theta,index) {
 		} else if (this.type === 2 && waterLevel < this.p[1] + this.s*sqrt(2) && waterLevel > this.p[1]){
 			if (this.theta === 0) {
 				crystalImages[this.index].loadPixels();
-				var start = floor(351*(waterLevel-this.p[1])/this.s)*351*4;
-				var end = (floor(351*(waterLevel-this.p[1])/this.s)+10)*351*4;
+				var start = floor(groupWidth*(waterLevel-this.p[1])/this.s)*groupWidth*4;
+				var end = (floor(groupWidth*(waterLevel-this.p[1])/this.s)+10)*groupWidth*4;
 				var start2 = 0;
 				var end2 = crystalImages[index].pixels.length;
 				for (var i = start2; i < end2; i+=4) {
@@ -1239,8 +1239,8 @@ var newCrystal = function(x,y,s,type,theta,index) {
 			} else {
 				//console.log(crystalImages[this.index].height);
 				crystalImages[this.index].loadPixels();
-				var start = floor(496*(waterLevel-this.p[1]+72*this.s/351)/(this.s*sqrt(2)))*496*4;
-				var end = (floor(496*(waterLevel-this.p[1]+72*this.s/351)/(this.s*sqrt(2)))+10)*496*4;
+				var start = floor((groupWidth*sqrt(2))*(waterLevel-this.p[1]+((sqrt(2)-1)*groupWidth/2)*this.s/groupWidth)/(this.s*sqrt(2)))*(groupWidth*sqrt(2))*4;
+				var end = (floor((groupWidth*sqrt(2))*(waterLevel-this.p[1]+((sqrt(2)-1)*groupWidth/2)*this.s/groupWidth)/(this.s*sqrt(2)))+10)*(groupWidth*sqrt(2))*4;
 				var start2 = 0;
 				var end2 = crystalImages[index].pixels.length;
 				for (var i = start2; i < end2; i+=4) {
@@ -1259,8 +1259,8 @@ var newCrystal = function(x,y,s,type,theta,index) {
 		} else if (this.type === 1 && waterLevel < this.p[1] + this.s*sqrt(2) && waterLevel > this.p[1]){
 			if (this.theta === 0) {
 				singleCrystalImages[this.index].loadPixels();
-				var start = floor(351*(waterLevel-this.p[1])/this.s)*351*4;
-				var end = (floor(351*(waterLevel-this.p[1])/this.s)+10)*351*4;
+				var start = floor(groupWidth*(waterLevel-this.p[1])/this.s)*groupWidth*4;
+				var end = (floor(groupWidth*(waterLevel-this.p[1])/this.s)+10)*groupWidth*4;
 				var start2 = 0;
 				var end2 = singleCrystalImages[index].pixels.length;
 				for (var i = start2; i < end2; i+=4) {
@@ -1273,8 +1273,8 @@ var newCrystal = function(x,y,s,type,theta,index) {
 			} else {
 				//console.log(singleCrystalImages[this.index].height);
 				singleCrystalImages[this.index].loadPixels();
-				var start = floor(496*(waterLevel-this.p[1]+72*this.s/351)/(this.s*sqrt(2)))*496*4;
-				var end = (floor(496*(waterLevel-this.p[1]+72*this.s/351)/(this.s*sqrt(2)))+10)*496*4;
+				var start = floor((groupWidth*sqrt(2))*(waterLevel-this.p[1]+((sqrt(2)-1)*groupWidth/2)*this.s/groupWidth)/(this.s*sqrt(2)))*(groupWidth*sqrt(2))*4;
+				var end = (floor((groupWidth*sqrt(2))*(waterLevel-this.p[1]+((sqrt(2)-1)*groupWidth/2)*this.s/groupWidth)/(this.s*sqrt(2)))+10)*(groupWidth*sqrt(2))*4;
 				var start2 = 0;
 				var end2 = singleCrystalImages[index].pixels.length;
 				for (var i = start2; i < end2; i+=4) {
