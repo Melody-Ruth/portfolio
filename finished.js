@@ -152,6 +152,8 @@ function preload() {
 	}
 }
 
+var groupWidth = 150;
+
 function setup() {
 	createCanvas(600,600);
 	noFill();
