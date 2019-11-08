@@ -144,8 +144,6 @@ var darkness, darkness2, waterDarkness;
 
 //Load all of the images used in the game
 function preload() {
-	testing = loadImage("test_image.png");
-	smiley = loadImage("smiley.png");
 	crystal = loadImage("crystal_low_res.png");
 	crystalGroup = loadImage("crystal_group2_low_res.png");
 	crystalGroupWater = loadImage("crystal_group_water_low_res.png");
