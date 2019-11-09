@@ -153,6 +153,7 @@ function preload() {
 	waterDarkness = loadImage("water_darkness.png");
 	mapCover = loadImage("map_cover.png");
 	menu = loadImage("menu.png");
+	help = loadImage("help.png");
 	mapImage = loadImage("map_low_res.png");
 	
 	//Load the water crystal group images. They each need to load their own so that manipulating one won't affect the others.
@@ -1749,11 +1750,12 @@ var drawMushroom = function(x, y, s) {
 
 var drawHow = function() {
     background(51, 22, 7);
-    push();
+    /*push();
     scale(1.5);
     fill(15, 92, 140);
     rect(0, 352, 400, 145);
-    drawClump(0, 109);
+    drawClump(0, 109);*/
+    image(help,0,0,600,600);
     fill(135, 255, 161);
     textSize(25);
     text("Move with the arrow keys. When in water, use the down arrow key to stop yourself from floating. Find crystals for extra points. While you're submerged in water, your torch is extinguished.", 31, 32, 300, 300);
