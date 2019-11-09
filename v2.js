@@ -152,7 +152,7 @@ function preload() {
 	darkness2 = loadImage("darkness2.png");
 	waterDarkness = loadImage("water_darkness.png");
 	mapCover = loadImage("map_cover.png");
-	menu = loadImage("menu_image.png");
+	menu = loadImage("menu.png");
 	mapImage = loadImage("map_low_res.png");
 	
 	//Load the water crystal group images. They each need to load their own so that manipulating one won't affect the others.
