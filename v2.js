@@ -1757,8 +1757,8 @@ var drawHow = function() {
     drawClump(0, 109);*/
     image(help,0,0,600,600);
     fill(135, 255, 161);
-    textSize(25);
-    text("Move with the arrow keys. When in water, use the down arrow key to stop yourself from floating. Find crystals for extra points. While you're submerged in water, your torch is extinguished.", 31, 32, 300, 300);
+    textSize(32);
+    text("Move with the arrow keys. When in water, use the down arrow key to stop yourself from floating. Find crystals for extra points. While you're submerged in water, your torch is extinguished. Use the map to check where you are. It will fill in as you explore the caves.", 31, 32, 500, 500);
     pop();
     
     backHow.drawIt();
