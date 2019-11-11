@@ -144,17 +144,17 @@ var darkness, darkness2, waterDarkness;
 
 //Load all of the images used in the game
 function preload() {
-	crystal = loadImage("crystal_low_res.png");
-	crystalGroup = loadImage("crystal_group2_low_res.png");
-	crystalGroupWater = loadImage("crystal_group_water_low_res.png");
-	crystalWater = loadImage("crystal_water_low_res.png");
-	darkness = loadImage("darkness1.png");
-	darkness2 = loadImage("darkness2.png");
-	waterDarkness = loadImage("water_darkness.png");
-	mapCover = loadImage("map_cover.png");
-	menu = loadImage("menu.png");
-	help = loadImage("help.png");
-	mapImage = loadImage("map_low_res.png");
+	crystal = loadImage("../graphics/crystal_low_res.png");
+	crystalGroup = loadImage("../graphics/crystal_group2_low_res.png");
+	crystalGroupWater = loadImage("../graphics/crystal_group_water_low_res.png");
+	crystalWater = loadImage("../graphics/crystal_water_low_res.png");
+	darkness = loadImage("../graphics/darkness1.png");
+	darkness2 = loadImage("../graphics/darkness2.png");
+	waterDarkness = loadImage("../graphics/water_darkness.png");
+	mapCover = loadImage("../graphics/map_cover.png");
+	menu = loadImage("../graphics/menu.png");
+	help = loadImage("../graphics/help.png");
+	mapImage = loadImage("../graphics/map_low_res.png");
 	
 	//Load the water crystal group images. They each need to load their own so that manipulating one won't affect the others.
 	for (var i = 0; i < 23; i++) {
