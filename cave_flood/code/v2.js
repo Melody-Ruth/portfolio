@@ -1672,14 +1672,12 @@ angleMode(DEGREES);
 		fill(255,255,255);
 		textSize(25);
 		text("x"+mapsLeft,557,75);
+		if (toMap.pressed) {
+			state = "map";
+			mapsLeft--;
+		}
 	} else {
 		image(greyMap,510,15,75,58);
-	}
-	
-	if (toMap.pressed) {
-		state = "map";
-		toMap.pressed = false;
-		mapsLeft--;
 	}
 
 	keyIsReleased = false;
