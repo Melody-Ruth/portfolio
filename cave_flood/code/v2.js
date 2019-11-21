@@ -1678,6 +1678,7 @@ angleMode(DEGREES);
 	
 	if (toMap.pressed) {
 		state = "map";
+		toMap.pressed = false;
 		mapsLeft--;
 	}
 
