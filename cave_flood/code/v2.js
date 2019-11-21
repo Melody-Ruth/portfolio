@@ -1671,7 +1671,7 @@ angleMode(DEGREES);
 		image(mapImage,510,15,75,58);
 		fill(255,255,255);
 		textSize(25);
-		text("x"+mapsLeft,567,75);
+		text("x"+mapsLeft,557,75);
 	} else {
 		image(greyMap,510,15,75,58);
 	}
