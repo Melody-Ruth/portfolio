@@ -155,6 +155,7 @@ function preload() {
 	menu = loadImage("../graphics/menu.png");
 	help = loadImage("../graphics/help.png");
 	mapImage = loadImage("../graphics/map_low_res.png");
+	greyMap = loadImage("../graphics/map_greyedout_low_res.png");
 	
 	//Load the water crystal group images. They each need to load their own so that manipulating one won't affect the others.
 	for (var i = 0; i < 23; i++) {
@@ -261,6 +262,7 @@ var xTranslate = 370-ballStartPos[0];
 var yTranslate = 430-ballStartPos[1];
 var xTranslateShifter = 0;//Current rate at which the part of the game shown is moving left
 var yTranslateShifter = 0;//Current rate at which the part of the game shown is moving up
+var mapsLeft = 3;
 
 var ball = {};
 //ball.p = [370,430];//position
@@ -1667,8 +1669,16 @@ angleMode(DEGREES);
 	toMap.update();
 	if (toMap.pressed) {
 		state = "map";
+		mapsLeft--;
 	}
-	image(mapImage,510,15,75,58);
+	if (mapsLeft > 0) {
+		image(mapImage,510,15,75,58);
+		fill(0,0,0);
+		textSize(40);
+		text("x"+mapsLeft,535,68);
+	} else {
+		image(greyMap,510,15,75,58);
+	}
 	
 	keyIsReleased = false;
 	//mouseIsClicked = false;
