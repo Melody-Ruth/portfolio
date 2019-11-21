@@ -1669,9 +1669,9 @@ angleMode(DEGREES);
 	if (mapsLeft > 0) {
 		toMap.update();
 		image(mapImage,510,15,75,58);
-		fill(0,0,0);
-		textSize(20);
-		text("x"+mapsLeft,550,68);
+		fill(255,255,255);
+		textSize(25);
+		text("x"+mapsLeft,567,75);
 	} else {
 		image(greyMap,510,15,75,58);
 	}
