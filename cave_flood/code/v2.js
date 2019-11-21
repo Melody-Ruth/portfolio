@@ -1666,20 +1666,21 @@ angleMode(DEGREES);
 		//Doesn't work around midnight
 	}
 	
-	toMap.update();
-	if (toMap.pressed) {
-		state = "map";
-		mapsLeft--;
-	}
 	if (mapsLeft > 0) {
+		toMap.update();
 		image(mapImage,510,15,75,58);
 		fill(0,0,0);
-		textSize(40);
-		text("x"+mapsLeft,535,68);
+		textSize(20);
+		text("x"+mapsLeft,550,68);
 	} else {
 		image(greyMap,510,15,75,58);
 	}
 	
+	if (toMap.pressed) {
+		state = "map";
+		mapsLeft--;
+	}
+
 	keyIsReleased = false;
 	//mouseIsClicked = false;
 };
