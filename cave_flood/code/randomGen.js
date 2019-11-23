@@ -2173,7 +2173,7 @@ var drawSettings = function() {
     text("Reload for changes to take effect",200,450);
     fill(255,255,255);
     textSize(25);
-    text("Randomly generated levels",50,100);
+    text("Randomly generated map",50,100);
     
     backHow.drawIt();
     backHow.update();
