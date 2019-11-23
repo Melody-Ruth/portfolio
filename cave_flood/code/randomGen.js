@@ -226,7 +226,7 @@ var starSec;
 var endMin, endSec, totalMin, totalSec;
 var timer = 0;//Keeps track of how many times the draw function has been executed. I use it to do image stuff on the first time through.
 var g = 0.1633;//Pull of gravity. I flip it when the ball is in water to simulate buoyancy overpowering gravity.
-var ballStartPos = [60,50];//Where the ball starts the game
+var ballStartPos = [60,-90];//Where the ball starts the game
 //Should start 60,3790
 var waterLevel = 7000;//Starting water level
 var waterColor = [155, 151, 230];
@@ -1499,6 +1499,7 @@ var nextSingle = 0;
 var nextGroup = 0;
 var numCrystals;
 var crystalOffset = 2;
+var openings = [];
 //console.log(grid[90][20]);
 
 var xToIndex = function(x) {
@@ -1681,8 +1682,7 @@ var generatePassage = function(x,y,w,h,left,right,up,down,cameFrom) {
 			//if (checkGrid(x+pathWidth/2-circleR,y+overlapGuess-2*circleR,circleR*2,circleR*2)) {
 				//console.log("hi");
 				generateCircle(x+pathWidth/2,y+overlapGuess-circleR,"below");
-			} else {
-				
+			} else if (y !== 0){
 				passages[passages.length-1].up = true;
 			}
 		}
@@ -1744,10 +1744,15 @@ var generateCircle = function(x,y,cameFrom) {
 			i--;
 		}
 		if (i < yToIndex(y-circleR)-3) {
-			i = floor(i,random(yToIndex(y-circleR)-3));
-			//console.log((x-pathWidth/2)+","+(y+circleR-overlapGuess)+","+pathWidth+","+(indexToY(i-1)-(y+circleR)+2*overlapGuess));
-			//generatePassage(x-pathWidth/2,y+circleR-overlapGuess,pathWidth,indexToY(i-1)-(y+circleR)+2*overlapGuess,true,true,false,false,"above");
-			generatePassage(x-pathWidth/2,indexToY(i+2)-overlapGuess,pathWidth,y-circleR-indexToY(i+2)+2*overlapGuess,true,true,false,false,"below");
+			if (i == 0) {
+				generatePassage(x-pathWidth/2,0,pathWidth,y-circleR+overlapGuess,true,true,false,false,"below");
+				openings.push([x-pathWidth/2,x+pathWidth/2]);
+			} else {
+				i = floor(i,random(yToIndex(y-circleR)-3));
+				//console.log((x-pathWidth/2)+","+(y+circleR-overlapGuess)+","+pathWidth+","+(indexToY(i-1)-(y+circleR)+2*overlapGuess));
+				//generatePassage(x-pathWidth/2,y+circleR-overlapGuess,pathWidth,indexToY(i-1)-(y+circleR)+2*overlapGuess,true,true,false,false,"above");
+				generatePassage(x-pathWidth/2,indexToY(i+2)-overlapGuess,pathWidth,y-circleR-indexToY(i+2)+2*overlapGuess,true,true,false,false,"below");
+			}
 		}
 	}
 };
@@ -1769,6 +1774,7 @@ function setup() {
 	ranGen.on = randomGen;
 	
 	if (randomGen) {
+		openings.push([0,pathWidth]);
 		generatePassage(0,0,pathWidth,400,true,true,false,false,"above");
 	} else {
 		//All rotated crystals need their images replaced. Must be in setup, since createImage is used in rotateImage and createImage is a setup thing.
@@ -1831,6 +1837,8 @@ function setup() {
 			newCrystal(1735,3790+100,48,2,-20,17),newCrystal(1695,3090+100,70,2,-90,18),newCrystal(980,2712+100,75,2,28,19),
 			newCrystal(2255,2720+100,80,1,0,5),newCrystal(2325,2215+100,60,2,-150,20),newCrystal(350,2375+100,70,1,180,6),
 			newCrystal(800,3262+100,60,2,0,21),newCrystal(580,790+100,65,1,0,7),newCrystal(520,500+100,60,2,-90,22),newCrystal(1755,250+100,70,1,-70,8)];
+	
+		openings = [[0,150],[425,425+150],[1610,1610+150]];
 	}
 	
 	//darkness = createImage(1200,1200);
@@ -1846,6 +1854,7 @@ var crystals = [newCrystal(500,281,70,1,0,0),newCrystal(1178,387,60,2,-40,0),new
 //['r',3100,3250]
 
 var state = "menu";
+var inAnOpening = false;
 
 var game = function() {
 angleMode(DEGREES);
@@ -1863,7 +1872,10 @@ angleMode(DEGREES);
 	fill(91, 201, 94);
 	rect(-6000,-10,20000,10);
 	fill(130, 214, 237);
-	rect(0,-10,pathWidth,11);
+	for (var i = 0; i < openings.length; i++) {
+		rect(openings[i][0],-10,pathWidth,11);
+	}
+	//rect(0,-10,pathWidth,11);
 	//rect(1610,0,150,11);
 	//rect(425,0,150,11);
 	for (var i = 0; i < enclosures.length; i++) {
@@ -1949,6 +1961,12 @@ angleMode(DEGREES);
 	for (var i = 0; i < passages.length; i++) {
 		passages[i].collide();
 	}
+	inAnOpening = false;
+	for (var i = 0; i < openings.length; i++) {
+		if (ball.p[0] > openings[i][0]+20 && ball.p[0] < openings[i][1]-20) {
+			inAnOpening = true;
+		}
+	}
 	if (!ball.inPassage) {
 		for (var i = 0; i < enclosures.length; i++) {
 			enclosures[i].collide();
@@ -1956,7 +1974,7 @@ angleMode(DEGREES);
 		for (var i = 0; i < reverses.length; i++) {
 			reverses[i].collide();
 		}
-		if (ball.p[1]+ball.r >= -10 && ball.p[1]+ball.r < 30 && !(ball.p[0] >= 20 && ball.p[0] <= pathWidth-20) && !(ball.p[0] >= 1630 && ball.p[0] <= 1740)) {//bouncing off floor
+		if (ball.p[1]+ball.r >= -10 && ball.p[1]+ball.r < 30 && !inAnOpening) {//bouncing off floor
 			ball.restingBottom = true;
 			this.m = 0;
 			this.b = -100;
