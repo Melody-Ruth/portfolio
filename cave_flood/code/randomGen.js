@@ -2028,7 +2028,7 @@ angleMode(DEGREES);
 	text('Score: '+ball.score,270,550);
 	//console.log("Still playing");
 	
-	/*if (ball.p[1] < -20) {
+	if (ball.p[1] < -20) {
 		//console.log("Done!");
 		//noLoop();
 		state = "over";
@@ -2041,7 +2041,7 @@ angleMode(DEGREES);
 			totalMin--;
 		}
 		//Doesn't work around midnight
-	}*/
+	}
 	
 	if (mapsLeft > 0) {
 		toMap.update();
@@ -2095,7 +2095,7 @@ var drawMap = function() {
 	pop();
 	backMap.drawIt();
 	backMap.update();
-	//image(mapCover,0,44,600,512);
+	image(mapCover,0,44,600,512);
 	if (backMap.pressed) {
 		state = "play";
 	}
