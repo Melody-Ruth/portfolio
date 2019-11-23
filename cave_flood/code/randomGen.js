@@ -226,7 +226,7 @@ var starSec;
 var endMin, endSec, totalMin, totalSec;
 var timer = 0;//Keeps track of how many times the draw function has been executed. I use it to do image stuff on the first time through.
 var g = 0.1633;//Pull of gravity. I flip it when the ball is in water to simulate buoyancy overpowering gravity.
-var ballStartPos = [60,-90];//Where the ball starts the game
+var ballStartPos = [60,50];//Where the ball starts the game
 //Should start 60,3790
 var waterLevel = 7000;//Starting water level
 var waterColor = [155, 151, 230];
