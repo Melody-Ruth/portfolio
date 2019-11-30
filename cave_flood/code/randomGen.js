@@ -2097,7 +2097,7 @@ var drawMap = function() {
 	push();
 	scale(0.1);
 	//translate(2850,540);
-	translate(2850,100);
+	translate(2850,440);
 	for (var i = 0; i < enclosures.length; i++) {
 		enclosures[i].drawIt();
 	}
