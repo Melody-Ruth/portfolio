@@ -226,7 +226,7 @@ var starSec;
 var endMin, endSec, totalMin, totalSec;
 var timer = 0;//Keeps track of how many times the draw function has been executed. I use it to do image stuff on the first time through.
 var g = 0.1633;//Pull of gravity. I flip it when the ball is in water to simulate buoyancy overpowering gravity.
-var ballStartPos = [60,50];//Where the ball starts the game
+var ballStartPos = [60,-90];//Where the ball starts the game
 //Should start 60,3790
 var waterLevel = 7000;//Starting water level
 var waterColor = [155, 151, 230];
@@ -460,6 +460,7 @@ var play = newButton(130*1.5, 120*1.5, 140*1.5, 80*1.5, "Play",3/14);
 var how = newButton(130*1.5, 250*1.5, 140*1.5, 80*1.5, "How",3/14);
 var backHow = newButton(20*1.5, 320*1.5, 110*1.5, 60*1.5, "Back",3/14);
 var backMap = newButton(2, 0, 60, 44, "Back",1/7);
+var backSettings = newButton(20*1.5, 320*1.5, 110*1.5, 60*1.5, "Save",3/14);
 var toMap = newButton(505,10,85,68,"",0);
 var settingsButton = newButtonCircle(555,555,25);
 //var ranGenOn = newButton(50,250,220,100,"On",3/14);
@@ -1075,6 +1076,10 @@ var newPassage = function(x,y,w,h,left,right,up,down,cutOuts) {
 	passage.down = down;
 	passage.ballIn = false;
 	passage.cutOuts = cutOuts;
+	passage.shouldTestLeft = true;
+	passage.shouldTestRight = true;
+	passage.shouldTestUp = true;
+	passage.shouldTestDown = true;
 	passage.drawIt = function() {
 		//fill(71, 40, 24);
 		//rect(this.x,this.y,this.w,this.h);
@@ -1106,140 +1111,139 @@ var newPassage = function(x,y,w,h,left,right,up,down,cutOuts) {
 				shouldTest = false;
 			}
 		}*/
-		var myShouldTest = true;
+		//var myShouldTest = true;
+		this.shouldTestRight = true;
+		this.shouldTestLeft = true;
+		this.shouldTestUp = true;
+		this.shouldTestDown = true;
 		for (var j = 0; j < this.cutOuts.length; j++) {
 			if (this.cutOuts[j][0] === 'l') {
-				if (ball.p[0]-ball.r < this.x+this.w*1/4 && ball.p[0] > this.x-ball.r && ball.p[1]-ball.r > this.cutOuts[j][1] && ball.p[1]+ball.r < this.cutOuts[j][2]) {
-					myShouldTest = false;
+				if (ball.p[1]-ball.r > this.cutOuts[j][1] && ball.p[1]+ball.r < this.cutOuts[j][2]) {
+					this.shouldTestLeft = false;
 					//console.log("hi "+myShouldTest);
 				}
 			} else if (this.cutOuts[j][0] === 'r') {
 				if (ball.p[0]+ball.r > this.x+this.w*3/4 && ball.p[0] < this.x+this.w+ball.r && ball.p[1]-ball.r > this.cutOuts[j][1] && ball.p[1]+ball.r < this.cutOuts[j][2]) {
-					myShouldTest = false;
+					this.shouldTestRight = false;
 					//console.log("hi "+myShouldTest);
 				}
 			} else if (this.cutOuts[j][0] === 'u') {
 				if (ball.p[1] - ball.r < this.y+5 && ball.p[1]+ball.r > this.y-5 && ball.p[0]-ball.r > this.cutOuts[j][1] && ball.p[0]+ball.r < this.cutOuts[j][2]) {
-					myShouldTest = false;
+					this.shouldTestUp = false;
 					//console.log("hi "+myShouldTest);
 				}
 			} else if (this.cutOuts[j][0] === 'd') {
 				if (ball.p[1] + ball.r > this.y+this.h-5 && ball.p[1]-ball.r < this.y+this.h+5 && ball.p[0]-ball.r > this.cutOuts[j][1] && ball.p[0]+ball.r < this.cutOuts[j][2]) {
-					myShouldTest = false;
+					this.shouldTestDown = false;
 					//console.log("hi "+myShouldTest);
 				}
 			}
 		}
-		if (myShouldTest) {
-			if (ball.p[0] > this.x && ball.p[0] < this.x+this.w && ball.p[1]+ball.r > this.y && ball.p[1]-ball.r < this.y+this.h || ball.p[0]+ball.r > this.x && ball.p[0]-ball.r < this.x+this.w && ball.p[1] > this.y && ball.p[1] < this.y+this.h) {
-				/*if (this.cutOuts.length === 1) {
-					console.log("Uh, oh "+myShouldTest);
-				}*/
-				ball.inPassage = true;
-				this.ballIn = true;
-				if (this.left && ball.p[0]-ball.r < this.x) {//Left side
-					var unitRamp = [0,1];
-					var parallelVelocity = ball.e2*(ball.v[0] * unitRamp[0] + ball.v[1] * unitRamp[1]);
-					var perpendicularVelocity = -ball.e*sqrt(sq(ball.v[0])+sq(ball.v[1])-sq(parallelVelocity));
-					ball.v[0] = parallelVelocity*unitRamp[0] - perpendicularVelocity*unitRamp[1];
-					ball.v[1] = parallelVelocity*unitRamp[1] + perpendicularVelocity*unitRamp[0];
-					//ball.v[0] *= ball.e;
-					//ball.v[1] *= ball.e;
-					var theta = 90;
-					var aTotal = g*sin(theta);
-					if (ball.right) {
-						aTotal += ball.rightForce*ball.m*cos(theta);
-					}
-					if (ball.left) {
-						aTotal -= ball.leftForce*ball.m*cos(theta);
-					}
-					if (ball.down) {
-						aTotal += 0.05*sin(theta);
-					}
-					ball.a[0] = aTotal*unitRamp[0];
-					ball.a[1] = aTotal*unitRamp[1];
+		if (ball.p[0] > this.x && ball.p[0] < this.x+this.w && ball.p[1]+ball.r > this.y && ball.p[1]-ball.r < this.y+this.h || ball.p[0]+ball.r > this.x && ball.p[0]-ball.r < this.x+this.w && ball.p[1] > this.y && ball.p[1] < this.y+this.h) {
+			/*if (this.cutOuts.length === 1) {
+				console.log("Uh, oh "+myShouldTest);
+			}*/
+			ball.inPassage = true;
+			this.ballIn = true;
+			if (this.shouldTestLeft && this.left && ball.p[0]-ball.r < this.x) {//Left side
+				var unitRamp = [0,1];
+				var parallelVelocity = ball.e2*(ball.v[0] * unitRamp[0] + ball.v[1] * unitRamp[1]);
+				var perpendicularVelocity = -ball.e*sqrt(sq(ball.v[0])+sq(ball.v[1])-sq(parallelVelocity));
+				ball.v[0] = parallelVelocity*unitRamp[0] - perpendicularVelocity*unitRamp[1];
+				ball.v[1] = parallelVelocity*unitRamp[1] + perpendicularVelocity*unitRamp[0];
+				//ball.v[0] *= ball.e;
+				//ball.v[1] *= ball.e;
+				var theta = 90;
+				var aTotal = g*sin(theta);
+				if (ball.right) {
+					aTotal += ball.rightForce*ball.m*cos(theta);
 				}
-				if (this.right && ball.p[0]+ball.r > this.x+this.w) {//Right side
-					var unitRamp = [0,1];
-					var parallelVelocity = ball.e2*(ball.v[0] * unitRamp[0] + ball.v[1] * unitRamp[1]);
-					var perpendicularVelocity = ball.e*sqrt(sq(ball.v[0])+sq(ball.v[1])-sq(parallelVelocity));
-					ball.v[0] = parallelVelocity*unitRamp[0] - perpendicularVelocity*unitRamp[1];
-					ball.v[1] = parallelVelocity*unitRamp[1] + perpendicularVelocity*unitRamp[0];
-					//ball.v[0] *= ball.e;
-					//ball.v[1] *= ball.e;
-					var theta = 90;
-					var aTotal = g*sin(theta);
-					if (ball.right) {
-						aTotal += ball.rightForce*ball.m*cos(theta);
-					}
-					if (ball.left) {
-						aTotal -= ball.leftForce*ball.m*cos(theta);
-					}
-					if (ball.down) {
-						aTotal += 0.05*sin(theta);
-					}
-					ball.a[0] = aTotal*unitRamp[0];
-					ball.a[1] = aTotal*unitRamp[1];
+				if (ball.left) {
+					aTotal -= ball.leftForce*ball.m*cos(theta);
 				}
-				if (this.up && ball.p[1]-ball.r < this.y) {//ceiling
-					//console.log("hi");
-					ball.restingTop = true;
-					this.m = 0;
-					this.b = this.y+this.h;
-					var unitRamp = [1/sqrt(1+sq(this.m)),this.m/sqrt(1+sq(this.m))];
-					var unitPer = [this.m/sqrt(1+sq(this.m)),-1/sqrt(1+sq(this.m))];
-					var parallelVelocity = ball.e2*(ball.v[0] * unitRamp[0] + ball.v[1] * unitRamp[1]);
-					var perpendicularVelocity = ball.e*sqrt(sq(ball.v[0])+sq(ball.v[1])-sq(parallelVelocity));
-					ball.v[0] = parallelVelocity*unitRamp[0] - perpendicularVelocity*unitRamp[1];
-					ball.v[1] = parallelVelocity*unitRamp[1] + perpendicularVelocity*unitRamp[0];
-					//ball.v[0] *= ball.e;
-					//ball.v[1] *= ball.e;
-					var theta = atan(this.m);
-					var aTotal = g*sin(theta);
-					//console.log(sin(theta)+" "+cos(theta));
-					if (ball.right) {
-						aTotal += ball.rightForce*ball.m*cos(theta);
-					}
-					if (ball.left) {
-						aTotal -= ball.leftForce*ball.m*cos(theta);
-					}
-					if (ball.down) {
-						aTotal += 0.05*sin(theta);
-					}
-					ball.a[0] = aTotal*unitRamp[0];
-					ball.a[1] = aTotal*unitRamp[1];
+				if (ball.down) {
+					aTotal += 0.05*sin(theta);
 				}
-				if (this.down && ball.p[1]+ball.r > this.y+this.h) {//floor
-					ball.restingBottom = true;
-					this.m = 0;
-					this.b = this.y+this.h;
-					var unitRamp = [1/sqrt(1+sq(this.m)),this.m/sqrt(1+sq(this.m))];
-					var unitPer = [this.m/sqrt(1+sq(this.m)),-1/sqrt(1+sq(this.m))];
-					var parallelVelocity = ball.e2*(ball.v[0] * unitRamp[0] + ball.v[1] * unitRamp[1]);
-					var perpendicularVelocity = -ball.e*sqrt(sq(ball.v[0])+sq(ball.v[1])-sq(parallelVelocity));
-					ball.v[0] = parallelVelocity*unitRamp[0] - perpendicularVelocity*unitRamp[1];
-					ball.v[1] = parallelVelocity*unitRamp[1] + perpendicularVelocity*unitRamp[0];
-					//ball.v[0] *= ball.e;
-					//ball.v[1] *= ball.e;
-					var theta = atan(this.m);
-					var aTotal = g*sin(theta);
-					if (ball.right) {
-						aTotal += ball.rightForce*ball.m*cos(theta);
-					}
-					if (ball.left) {
-						aTotal -= ball.leftForce*ball.m*cos(theta);
-					}
-					if (ball.down) {
-						aTotal += 0.05*sin(theta);
-					}
-					ball.a[0] = aTotal*unitRamp[0];
-					ball.a[1] = aTotal*unitRamp[1];
+				ball.a[0] = aTotal*unitRamp[0];
+				ball.a[1] = aTotal*unitRamp[1];
+			}
+			if (this.shouldTestRight && this.right && ball.p[0]+ball.r > this.x+this.w) {//Right side
+				var unitRamp = [0,1];
+				var parallelVelocity = ball.e2*(ball.v[0] * unitRamp[0] + ball.v[1] * unitRamp[1]);
+				var perpendicularVelocity = ball.e*sqrt(sq(ball.v[0])+sq(ball.v[1])-sq(parallelVelocity));
+				ball.v[0] = parallelVelocity*unitRamp[0] - perpendicularVelocity*unitRamp[1];
+				ball.v[1] = parallelVelocity*unitRamp[1] + perpendicularVelocity*unitRamp[0];
+				//ball.v[0] *= ball.e;
+				//ball.v[1] *= ball.e;
+				var theta = 90;
+				var aTotal = g*sin(theta);
+				if (ball.right) {
+					aTotal += ball.rightForce*ball.m*cos(theta);
 				}
+				if (ball.left) {
+					aTotal -= ball.leftForce*ball.m*cos(theta);
+				}
+				if (ball.down) {
+					aTotal += 0.05*sin(theta);
+				}
+				ball.a[0] = aTotal*unitRamp[0];
+				ball.a[1] = aTotal*unitRamp[1];
+			}
+			if (this.shouldTestUp && this.up && ball.p[1]-ball.r < this.y) {//ceiling
+				//console.log("hi");
+				ball.restingTop = true;
+				this.m = 0;
+				this.b = this.y+this.h;
+				var unitRamp = [1/sqrt(1+sq(this.m)),this.m/sqrt(1+sq(this.m))];
+				var unitPer = [this.m/sqrt(1+sq(this.m)),-1/sqrt(1+sq(this.m))];
+				var parallelVelocity = ball.e2*(ball.v[0] * unitRamp[0] + ball.v[1] * unitRamp[1]);
+				var perpendicularVelocity = ball.e*sqrt(sq(ball.v[0])+sq(ball.v[1])-sq(parallelVelocity));
+				ball.v[0] = parallelVelocity*unitRamp[0] - perpendicularVelocity*unitRamp[1];
+				ball.v[1] = parallelVelocity*unitRamp[1] + perpendicularVelocity*unitRamp[0];
+				//ball.v[0] *= ball.e;
+				//ball.v[1] *= ball.e;
+				var theta = atan(this.m);
+				var aTotal = g*sin(theta);
+				//console.log(sin(theta)+" "+cos(theta));
+				if (ball.right) {
+					aTotal += ball.rightForce*ball.m*cos(theta);
+				}
+				if (ball.left) {
+					aTotal -= ball.leftForce*ball.m*cos(theta);
+				}
+				if (ball.down) {
+					aTotal += 0.05*sin(theta);
+				}
+				ball.a[0] = aTotal*unitRamp[0];
+				ball.a[1] = aTotal*unitRamp[1];
+			}
+			if (this.shouldTestDown && this.down && ball.p[1]+ball.r > this.y+this.h) {//floor
+				ball.restingBottom = true;
+				this.m = 0;
+				this.b = this.y+this.h;
+				var unitRamp = [1/sqrt(1+sq(this.m)),this.m/sqrt(1+sq(this.m))];
+				var unitPer = [this.m/sqrt(1+sq(this.m)),-1/sqrt(1+sq(this.m))];
+				var parallelVelocity = ball.e2*(ball.v[0] * unitRamp[0] + ball.v[1] * unitRamp[1]);
+				var perpendicularVelocity = -ball.e*sqrt(sq(ball.v[0])+sq(ball.v[1])-sq(parallelVelocity));
+				ball.v[0] = parallelVelocity*unitRamp[0] - perpendicularVelocity*unitRamp[1];
+				ball.v[1] = parallelVelocity*unitRamp[1] + perpendicularVelocity*unitRamp[0];
+				//ball.v[0] *= ball.e;
+				//ball.v[1] *= ball.e;
+				var theta = atan(this.m);
+				var aTotal = g*sin(theta);
+				if (ball.right) {
+					aTotal += ball.rightForce*ball.m*cos(theta);
+				}
+				if (ball.left) {
+					aTotal -= ball.leftForce*ball.m*cos(theta);
+				}
+				if (ball.down) {
+					aTotal += 0.05*sin(theta);
+				}
+				ball.a[0] = aTotal*unitRamp[0];
+				ball.a[1] = aTotal*unitRamp[1];
 			}
 		}
-		
-		
-		
 	};
 	passage.testCollide = function() {
 		if (ball.p[0] > this.x && ball.p[0] < this.x+this.w && ball.p[1]+ball.r > this.y && ball.p[1]-ball.r < this.y+this.h || ball.p[0]+ball.r > this.x && ball.p[0]-ball.r < this.x+this.w && ball.p[1] > this.y && ball.p[1] < this.y+this.h) {
@@ -1553,7 +1557,6 @@ var checkGridIndex = function(startX,startY,width,height) {
 	}
 	return true;
 };
-
 
 var setGrid = function(startX,startY,width,height) {
 	//Sets this rectanglular region to full
@@ -1873,7 +1876,7 @@ angleMode(DEGREES);
 	rect(-6000,-10,20000,10);
 	fill(130, 214, 237);
 	for (var i = 0; i < openings.length; i++) {
-		rect(openings[i][0],-10,pathWidth,11);
+		rect(openings[i][0],-10,openings[i][1]-openings[i][0],11);
 	}
 	//rect(0,-10,pathWidth,11);
 	//rect(1610,0,150,11);
@@ -2032,7 +2035,7 @@ angleMode(DEGREES);
 
 	pop();
 	
-	if (waterLevel > 10) {
+	if (waterLevel > 0) {
 		waterLevel --;
 	}
 	//console.log(ball.p[1]);
@@ -2076,6 +2079,9 @@ angleMode(DEGREES);
 	}
 
 	keyIsReleased = false;
+	if (timer % 10 === 0) {
+		//console.log(sqrt(sq(ball.v[0])+sq(ball.v[1])));
+	}
 	//mouseIsClicked = false;
 };
 
@@ -2189,13 +2195,13 @@ var drawSettings = function() {
     textSize(32);
     text("Settings",240,45);
     textSize(18);
-    text("Reload for changes to take effect",200,450);
+    //text("Reload for changes to take effect",200,450);
     fill(255,255,255);
     textSize(25);
     text("Randomly generated map",50,100);
     
-    backHow.drawIt();
-    backHow.update();
+    backSettings.drawIt();
+    backSettings.update();
     
     ranGen.drawIt();
     ranGen.update();
@@ -2204,8 +2210,8 @@ var drawSettings = function() {
     	storeItem("randomGen",randomGen);
     }
     
-    if (backHow.pressed) {
-        state = "menu";
+    if (backSettings.pressed) {
+        location.reload(); 
     }
 };
 
