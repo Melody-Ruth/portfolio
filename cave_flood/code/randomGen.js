@@ -145,28 +145,28 @@ var settings,settingsHover;
 
 //Load all of the images used in the game
 function preload() {
-	crystal = loadImage("../graphics/crystal_low_res.png");
-	crystalGroup = loadImage("../graphics/crystal_group2_low_res.png");
-	crystalGroupWater = loadImage("../graphics/crystal_group_water_low_res.png");
-	crystalWater = loadImage("../graphics/crystal_water_low_res.png");
-	darkness = loadImage("../graphics/darkness1.png");
-	darkness2 = loadImage("../graphics/darkness2.png");
-	waterDarkness = loadImage("../graphics/water_darkness.png");
-	mapCover = loadImage("../graphics/map_cover.png");
-	menu = loadImage("../graphics/menu.png");
-	help = loadImage("../graphics/help.png");
-	mapImage = loadImage("../graphics/map_low_res.png");
-	greyMap = loadImage("../graphics/map_greyedout_low_res.png");
-	settings = loadImage("../graphics/settings_transparent2.png");
-	settingsHover = loadImage("../graphics/settings_opaque2.png");
+	crystal = loadImage("../graphics/currently_using/crystal_low_res.png");
+	crystalGroup = loadImage("../graphics/currently_using/crystal_group2_low_res.png");
+	crystalGroupWater = loadImage("../graphics/currently_using/crystal_group_water_low_res.png");
+	crystalWater = loadImage("../graphics/currently_using/crystal_water_low_res.png");
+	darkness = loadImage("../graphics/currently_using/darkness1.png");
+	darkness2 = loadImage("../graphics/currently_using/darkness2.png");
+	waterDarkness = loadImage("../graphics/currently_using/water_darkness.png");
+	mapCover = loadImage("../graphics/currently_using/map_cover.png");
+	menu = loadImage("../graphics/currently_using/menu.png");
+	help = loadImage("../graphics/currently_using/help.png");
+	mapImage = loadImage("../graphics/currently_using/map_low_res.png");
+	greyMap = loadImage("../graphics/currently_using/map_greyedout_low_res.png");
+	settings = loadImage("../graphics/currently_using/settings_transparent2.png");
+	settingsHover = loadImage("../graphics/currently_using/settings_opaque2.png");
 	
 	//Load the water crystal group images. They each need to load their own so that manipulating one won't affect the others.
 	for (var i = 0; i < 30; i++) {
-		crystalImages[i] = loadImage("../graphics/crystal_group_water_low_res.png"/*, pic => print(pic), loadImgErrFix*/);
+		crystalImages[i] = loadImage("../graphics/currently_using/crystal_group_water_low_res.png"/*, pic => print(pic), loadImgErrFix*/);
 	}
 	//Load the water crystal images. They each need to load their own so that manipulating one won't affect the others.
 	for (var i = 0; i < 30; i++) {
-		singleCrystalImages[i] = loadImage("../graphics/crystal_water_low_res.png"/*, pic => print(pic), loadImgErrFix*/);
+		singleCrystalImages[i] = loadImage("../graphics/currently_using/crystal_water_low_res.png"/*, pic => print(pic), loadImgErrFix*/);
 	}
 }
 
