@@ -1,8 +1,8 @@
 :root {
 	--purple1: #edd0f5;
 	--purple2: #dfb7eb;
-	--purple3: #c790d6;
-	--purple4: #c172d6;
+	--purple3: #b54fd1;
+	--purple4: #962bb3;
 	--green1: #d4ffd4;
 	--green2: #b1f0b2;
 	--green3: #67c267;
@@ -38,6 +38,10 @@
 	font-size: 30px;
 	width: 100%;
 	text-align: left;
+}
+.dropdownButton:hover {
+	background-color:var(--purple2);
+	color:var(--purple4);
 }
 .miniHeader {
 	color:#302e13;
