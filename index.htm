@@ -20,9 +20,32 @@
 	color:#67c267;
 	cursor:pointer;
 }
+#ProjectsButton {
+	background-color:#edd0f5;
+	color:#c790d6;
+}
+#CaveButton {
+	background-color:#edd0f5;
+	color:#c790d6;
+	cursor:pointer;
+	font-size: 30px;
+	width: 100%;
+}
+#StarButton {
+	background-color:#edd0f5;
+	color:#c790d6;
+	cursor:pointer;
+	font-size: 30px;
+	width: 100%;
+}
 .miniHeader {
 	color:#302e13;
 	font-family:"Helvetica";
+}
+.largeHeader {
+	color:#302e13;
+	font-family:"Helvetica";
+	font-size: 28px;
 }
 .programNames {
 	color:#302e13;
@@ -31,14 +54,36 @@
 .thumbnail {
 	display:inline-block;
 }
+#header {
+	overflow: visible;
+}
+#projectDropdown {
+	position: relative;
+	display:inline-block;
+}
+#dropdownContent {
+	position: absolute;
+	z-index: 1;
+	display:none;
+}
 </style>
 <script src="main.js" type="text/JavaScript"></script>
 </head>
 <body style="background-color:#faf8ed;">
+<div onmousemove="mouseMoved()">
 <div id="header" style="background-color:#faf5d4;" align="center">
 <input type="button" value="Home" class="Button" id="HomeButton" onmouseover="onHomeHover()" onmouseout="onHomeNotHover()" onClick="homeClicked()"/>
+<div id="projectDropdown">
+<Button class="Button" id="ProjectsButton" onmouseover="onProjectsHover()" onmouseout="onProjectsNotHover()" onClick="projectsClicked()">Projects&#x25BC;</Button>
+<div id="dropdownContent" onmouseout="onDropdownNotHover()" onmouseover="onDropdownHover()">
+<Button class="Button" id="CaveButton" onmouseover="onCaveHover()" onmouseout="onCaveNotHover()" onClick="caveClicked()">Cave Flood</Button>
+<Button class="Button" id="StarButton" onmouseover="onStarHover()" onmouseout="onStarNotHover()" onClick="starClicked()">Star Tours</Button>
+</div>
+</div>
 <input type="button" value="Contact Me" class="Button" id="ContactButton" onmouseover="onContactHover()" onmouseout="onContactNotHover()" onClick="contactClicked()"/>
 </div>
+<div align="center">
+<h1 class="largeHeader">Melody Ruth's Software Portfolio</h1></div>
 <h2 class="miniHeader">Web Projects</h2>
 <!--Colors:
 Background: #fffbe3 (actually #faf8ed background and #faf5d4 header)
@@ -101,7 +146,7 @@ color:#212017;
 	<li><a href="file:///C:/Users/Melody/Documents/javascript_development/hair_salon/hair_salon.htm">Hair Salon Game</a></li>
 </ul>
 -->
-
+</div>
 </body>
 
 </html> 
