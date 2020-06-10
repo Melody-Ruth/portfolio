@@ -3,14 +3,14 @@ var onDropDown = false;
 
 function onHomeHover() {
 	var home = document.getElementById("HomeButton");
-	home.style.backgroundColor = "#97ccf7";
-	home.style.color = "#005fad";
+	home.style.backgroundColor = getComputedStyle(document.body).getPropertyValue('--blue2');
+	home.style.color = getComputedStyle(document.body).getPropertyValue('--blue4');
 }
 
 function onHomeNotHover() {
 	var home = document.getElementById("HomeButton");
-	home.style.backgroundColor = "#c7e6ff";
-	home.style.color = "#0275d4";
+	home.style.backgroundColor = getComputedStyle(document.body).getPropertyValue('--blue1');
+	home.style.color = getComputedStyle(document.body).getPropertyValue('--blue3');
 }
 
 function homeClicked() {
@@ -19,14 +19,14 @@ function homeClicked() {
 
 function onContactHover() {
 	var contact = document.getElementById("ContactButton");
-	contact.style.backgroundColor = "#b1f0b2";
-	contact.style.color = "#54ab54";
+	contact.style.backgroundColor = getComputedStyle(document.body).getPropertyValue('--green2');
+	contact.style.color = getComputedStyle(document.body).getPropertyValue('--green4');
 }
 
 function onContactNotHover() {
 	var contact = document.getElementById("ContactButton");
-	contact.style.backgroundColor = "#d4ffd4";
-	contact.style.color = "#67c267";
+	contact.style.backgroundColor =  getComputedStyle(document.body).getPropertyValue('--green1');
+	contact.style.color =  getComputedStyle(document.body).getPropertyValue('--green3');
 }
 
 function contactClicked() {
@@ -52,14 +52,14 @@ function onDropdownNotHover() {
 function mouseMoved() {
 	if (!onDropDown && !onProjectButton) {
 		var projects = document.getElementById("ProjectsButton");
-		projects.style.backgroundColor = "#edd0f5";
-		projects.style.color = "#c790d6";
+		projects.style.backgroundColor = getComputedStyle(document.body).getPropertyValue('--purple1');
+		projects.style.color = getComputedStyle(document.body).getPropertyValue('--purple3');
 		var dropdownContent = document.getElementById("dropdownContent");
 		dropdownContent.style.display = "none";
 	} else {
 		var projects = document.getElementById("ProjectsButton");
-		projects.style.backgroundColor = "#dfb7eb";
-		projects.style.color = "#c172d6";
+		projects.style.backgroundColor = getComputedStyle(document.body).getPropertyValue('--purple2');
+		projects.style.color = getComputedStyle(document.body).getPropertyValue('--purple4');
 		var dropdownContent = document.getElementById("dropdownContent");
 		dropdownContent.style.display = "block";
 	}
@@ -95,4 +95,36 @@ function onStarNotHover() {
 
 function starClicked() {
 	document.location = 'star_wars/code/star.htm';
+}
+
+function onArcheryHover() {
+	var archery = document.getElementById("ArcheryButton");
+	archery.style.backgroundColor = "#dfb7eb";
+	archery.style.color = "#c172d6";
+}
+
+function onArcheryNotHover() {
+	var archery = document.getElementById("ArcheryButton");
+	archery.style.backgroundColor = "#edd0f5";
+	archery.style.color = "#c790d6";
+}
+
+function archeryClicked() {
+	document.location = 'archery/code/archery.htm';
+}
+
+function onArtHover() {
+	var art = document.getElementById("ArtButton");
+	art.style.backgroundColor = "#dfb7eb";
+	art.style.color = "#c172d6";
+}
+
+function onArtNotHover() {
+	var art = document.getElementById("ArtButton");
+	art.style.backgroundColor = "#edd0f5";
+	art.style.color = "#c790d6";
+}
+
+function artClicked() {
+	document.location = 'art_studio/code/Art_Studio.htm';
 }

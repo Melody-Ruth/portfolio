@@ -4,69 +4,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta http-equiv="Content-Type" content="text/html; charset=ascii" />
 <title>Melody's Website</title>
-<style>
-.Button {
-	border: none;
-	font-size: 36px;
-	font-family:"Helvetica"
-}
-#HomeButton {
-	background-color:#c7e6ff;
-	color:#0275d4;
-	cursor:pointer;
-}
-#ContactButton {
-	background-color:#d4ffd4;
-	color:#67c267;
-	cursor:pointer;
-}
-#ProjectsButton {
-	background-color:#edd0f5;
-	color:#c790d6;
-}
-#CaveButton {
-	background-color:#edd0f5;
-	color:#c790d6;
-	cursor:pointer;
-	font-size: 30px;
-	width: 100%;
-}
-#StarButton {
-	background-color:#edd0f5;
-	color:#c790d6;
-	cursor:pointer;
-	font-size: 30px;
-	width: 100%;
-}
-.miniHeader {
-	color:#302e13;
-	font-family:"Helvetica";
-}
-.largeHeader {
-	color:#302e13;
-	font-family:"Helvetica";
-	font-size: 28px;
-}
-.programNames {
-	color:#302e13;
-	font-family:"Helvetica";
-}
-.thumbnail {
-	display:inline-block;
-}
-#header {
-	overflow: visible;
-}
-#projectDropdown {
-	position: relative;
-	display:inline-block;
-}
-#dropdownContent {
-	position: absolute;
-	z-index: 1;
-	display:none;
-}
-</style>
+<link rel="stylesheet" type="text/css" href="main.css">
 <script src="main.js" type="text/JavaScript"></script>
 </head>
 <body style="background-color:#faf8ed;">
@@ -76,8 +14,10 @@
 <div id="projectDropdown">
 <Button class="Button" id="ProjectsButton" onmouseover="onProjectsHover()" onmouseout="onProjectsNotHover()" onClick="projectsClicked()">Projects&#x25BC;</Button>
 <div id="dropdownContent" onmouseout="onDropdownNotHover()" onmouseover="onDropdownHover()">
-<Button class="Button" id="CaveButton" onmouseover="onCaveHover()" onmouseout="onCaveNotHover()" onClick="caveClicked()">Cave Flood</Button>
-<Button class="Button" id="StarButton" onmouseover="onStarHover()" onmouseout="onStarNotHover()" onClick="starClicked()">Star Tours</Button>
+<Button class="Button dropdownButton" id="CaveButton" onmouseover="onCaveHover()" onmouseout="onCaveNotHover()" onClick="caveClicked()">Cave Flood</Button>
+<Button class="Button dropdownButton" id="StarButton" onmouseover="onStarHover()" onmouseout="onStarNotHover()" onClick="starClicked()">Star Tours</Button>
+<Button class="Button dropdownButton" id="ArcheryButton" onmouseover="onArcheryHover()" onmouseout="onArcheryNotHover()" onClick="archeryClicked()">Archery</Button>
+<Button class="Button dropdownButton" id="ArtButton" onmouseover="onArtHover()" onmouseout="onArtNotHover()" onClick="artClicked()">Art Studio</Button>
 </div>
 </div>
 <input type="button" value="Contact Me" class="Button" id="ContactButton" onmouseover="onContactHover()" onmouseout="onContactNotHover()" onClick="contactClicked()"/>

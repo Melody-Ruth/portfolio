@@ -1,0 +1,69 @@
+:root {
+	--purple1: #edd0f5;
+	--purple2: #dfb7eb;
+	--purple3: #c790d6;
+	--purple4: #c172d6;
+	--green1: #d4ffd4;
+	--green2: #b1f0b2;
+	--green3: #67c267;
+	--green4: #54ab54;
+	--blue1: #c7e6ff;
+	--blue2: #97ccf7;
+	--blue3: #0275d4;
+	--blue4: #005fad;
+}
+.Button {
+	border: none;
+	font-size: 36px;
+	font-family:"Helvetica"
+}
+#HomeButton {
+	background-color:var(--blue1);
+	color:var(--blue3);
+	cursor:pointer;
+}
+#ContactButton {
+	background-color:var(--green1);
+	color:var(--green3);
+	cursor:pointer;
+}
+#ProjectsButton {
+	background-color:var(--purple1);
+	color:var(--purple3);
+}
+.dropdownButton {
+	background-color:var(--purple1);
+	color:var(--purple3);
+	cursor:pointer;
+	font-size: 30px;
+	width: 100%;
+	text-align: left;
+}
+.miniHeader {
+	color:#302e13;
+	font-family:"Helvetica";
+}
+.largeHeader {
+	color:#302e13;
+	font-family:"Helvetica";
+	font-size: 28px;
+}
+.programNames {
+	color:#302e13;
+	font-family:"Helvetica";
+}
+.thumbnail {
+	display:inline-block;
+}
+#header {
+	overflow: visible;
+}
+#projectDropdown {
+	position: relative;
+	display:inline-block;
+}
+#dropdownContent {
+	position: absolute;
+	z-index: 1;
+	display:none;
+}
