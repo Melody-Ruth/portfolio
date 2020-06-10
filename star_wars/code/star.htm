@@ -4,11 +4,28 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta http-equiv="Content-Type" content="text/html; charset=ascii" />
 <title>Star Tours</title>
-<link rel="stylesheet" type="text/css" href="star.css">
+<style>
+.Button {
+	border: none;
+	font-size: 36px;
+	font-family:"Helvetica"
+}
+#HomeButton {
+	background-color:#c7e6ff;
+	color:#0275d4;
+	cursor:pointer;
+}
+#ContactButton {
+	background-color:#d4ffd4;
+	color:#67c267;
+	cursor:pointer;
+}
+</style>
 <script type="text/javascript" src="../../resources/jquery.js"></script>
 <script type="text/javascript" src="../../resources/processing-1.4.1.js"></script>
 
 <script type="text/javascript" src="star.js"></script>
+<script type="text/javascript" src="starWeb.js"></script>
 
 <!-- wafjscacodeblockgroup, priority 15,  -->
 <script language="JavaScript1.2" >
@@ -24,13 +41,16 @@ $(document).ready(function() {
 
 </head>
    
-<body bgcolor="#ffffff" onResize="">
+<body style="background-color:#faf8ed;" onResize="">
+
+<div id="header" style="background-color:#faf5d4;" align="center">
+<input type="button" value="Home" class="Button" id="HomeButton" onmouseover="onHomeHover()" onmouseout="onHomeNotHover()" onClick="homeClicked()"/>
+<input type="button" value="Contact Me" class="Button" id="ContactButton" onmouseover="onContactHover()" onmouseout="onContactNotHover()" onClick="contactClicked()"/>
+</div>
 
 <div id="main">
 
 <canvas id='canvas1' style="border: 1px solid black;"></canvas>
-
-<a href="https://melody-ruth.github.io/programs-website/"><h2>Home</h2></a>
 
 </div>
 
