@@ -8,25 +8,31 @@
 .Button {
 	border: none;
 	font-size: 32px;
+	font-family:"Helvetica"
 }
 #HomeButton {
 	background-color:#c7e6ff;
 	color:#0275d4;
 	cursor:pointer;
 }
+.miniHeader {
+	color:#302e13;
+	font-family:"Helvetica";
+}
 </style>
 <script src="main.js" type="text/JavaScript"></script>
 </head>
 <body style="background-color:#faf8ed;">
 <div id="header" style="background-color:#faf5d4;" align="center">
-<input type="button" value="Home" class="Button" id="HomeButton" onmouseover="onHomeHover()" onmouseout="onHomeNotHover()"/>
+<input type="button" value="Home" class="Button" id="HomeButton" onmouseover="onHomeHover()" onmouseout="onHomeNotHover()" onClick="homeClicked()"/>
 </div>
-<h2>Processing.js Projects</h2>
+<h2 class="miniHeader">Processing.js Projects</h2>
 <!--Colors:
 Background: #fffbe3 (actually #faf8ed background and #faf5d4 header)
 Purple: #edd0f5 (#d9b3e3 hovered)
 Blue: #c7e6ff (#97ccf7 hovered)
 Green: #d4ffd4 (#b1f0b2 hovered)
+color:#212017;
  -->
 <!--
   <iframe src="Christmas_Tree.htm" width=600 height=600></iframe>

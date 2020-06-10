@@ -9,3 +9,7 @@ function onHomeNotHover() {
 	home.style.backgroundColor = "#c7e6ff";
 	home.style.color = "#0275d4";
 }
+
+function homeClicked() {
+	document.location = 'index.htm';
+}
