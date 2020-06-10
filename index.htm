@@ -4,13 +4,24 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta http-equiv="Content-Type" content="text/html; charset=ascii" />
 <title>Melody's Website</title>
-
+<style>
+.Button {
+	border: none;
+	font-size: 32px;
+}
+#HomeButton {
+	background-color:#c7e6ff;
+	color:#0275d4;
+	cursor:pointer;
+}
+</style>
+<script src="main.js" type="text/JavaScript"></script>
 </head>
 <body style="background-color:#faf8ed;">
-<div align="center">
-<div id="header" style="background-color:#faf5d4;">
-<h1>Processing.js Projects</h1>
+<div id="header" style="background-color:#faf5d4;" align="center">
+<input type="button" value="Home" class="Button" id="HomeButton" onmouseover="onHomeHover()" onmouseout="onHomeNotHover()"/>
 </div>
+<h2>Processing.js Projects</h2>
 <!--Colors:
 Background: #fffbe3 (actually #faf8ed background and #faf5d4 header)
 Purple: #edd0f5 (#d9b3e3 hovered)
@@ -24,7 +35,7 @@ Green: #d4ffd4 (#b1f0b2 hovered)
   
   <iframe src="Cauldron.htm" width=600 height=600></iframe>
   -->
-  
+  <div align="center">
   <a href="cave_flood/code/cave.htm"><img src="cave_flood/graphics/currently_using/cave_flood_thumbnail2.png" width=300 height=300></img></a>
   <a href="star_wars/code/star.htm"><img src="star_wars/graphics/star_tours_thumbnail.png" width=300 height=300></img></a>
   <a href="archery/code/archery.htm"><img src="archery/graphics/archery_thumbnail.png" width=300 height=300></img></a>
