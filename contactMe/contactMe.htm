@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta http-equiv="Content-Type" content="text/html; charset=ascii" />
+<title>Contact Me</title>
+<style>
+.Button {
+	border: none;
+	font-size: 36px;
+	font-family:"Helvetica"
+}
+#HomeButton {
+	background-color:#c7e6ff;
+	color:#0275d4;
+	cursor:pointer;
+}
+#ContactButton {
+	background-color:#d4ffd4;
+	color:#67c267;
+	cursor:pointer;
+}
+</style>
+    <script src="contactMe.js" type="text/JavaScript"></script>
+</head>
+
+<body style="background-color:#faf8ed;">
+<div id="header" style="background-color:#faf5d4;" align="center">
+<input type="button" value="Home" class="Button" id="HomeButton" onmouseover="onHomeHover()" onmouseout="onHomeNotHover()" onClick="homeClicked()"/>
+<input type="button" value="Contact Me" class="Button" id="ContactButton" onmouseover="onContactHover()" onmouseout="onContactNotHover()" onClick="contactClicked()"/>
+</div>
+
+</body>
+
+</html> 
