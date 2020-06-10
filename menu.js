@@ -63,17 +63,18 @@ function mouseMoved() {
 		var dropdownContent = document.getElementById("dropdownContent");
 		dropdownContent.style.display = "block";
 	}
+	console.log(onDropDown+" "+onProjectButton);
 }
 
 function caveClicked() {
-	document.location = 'cave_flood/code/cave.htm';
+	document.location = '../../cave_flood/code/cave.htm';
 }
 function starClicked() {
-	document.location = 'star_wars/code/star.htm';
+	document.location = '../../star_wars/code/star.htm';
 }
 function archeryClicked() {
-	document.location = 'archery/code/archery.htm';
+	document.location = '../../archery/code/archery.htm';
 }
 function artClicked() {
-	document.location = 'art_studio/code/Art_Studio.htm';
+	document.location = '../../art_studio/code/Art_Studio.htm';
 }
