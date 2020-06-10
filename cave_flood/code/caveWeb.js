@@ -11,7 +11,7 @@ function onHomeNotHover() {
 }
 
 function homeClicked() {
-	document.location = 'index.htm';
+	document.location = '../../index.htm';
 }
 
 function onContactHover() {
@@ -27,5 +27,5 @@ function onContactNotHover() {
 }
 
 function contactClicked() {
-	document.location = 'contactMe/code/contactMe.htm';
+	document.location = '../../contactMe/code/contactMe.htm';
 }
