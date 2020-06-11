@@ -63,7 +63,6 @@ function mouseMoved() {
 		var dropdownContent = document.getElementById("dropdownContent");
 		dropdownContent.style.display = "block";
 	}
-	console.log(onDropDown+" "+onProjectButton);
 }
 
 function caveClicked() {

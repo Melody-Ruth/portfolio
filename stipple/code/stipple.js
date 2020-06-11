@@ -18,6 +18,9 @@ function handleSizeInput() {
 var testWidth;
 function handleImageUpload() {
 	var readImage = document.getElementById("toStipple").files[0];
+	if (readImage.type != "image/png" && readImage.type != "image/jpeg") {
+		alert("Please choose a .png or .jpg file");
+	}
 	//var testImage;
 	
 	var reader = new FileReader();
@@ -66,7 +69,7 @@ function doStipple(srcImage) {
 		newCanvas.height = testCanvas.height;
 		var temp = testCanvas.getContext('2d');
 		var temp2 = newCanvas.getContext('2d');
-		console.log(testCanvas.width);
+		//console.log(testCanvas.width);
 		var pixelData = temp.getImageData(0, 0, testCanvas.width, testCanvas.height);
 		//var pixelData2 = temp.getImageData(0, 0, 100, 100);
 		//var alphaData = pixelData2.data[3];
@@ -128,7 +131,7 @@ function doStipple(srcImage) {
 		document.getElementById("testingCanvas").style.display="none";
 		document.getElementById("result-image").style.display="none";
 		document.getElementById("result-image2").style.display="none";
-		console.log("Done!");
+		//console.log("Done!");
 		
 		showStipple();
 	}

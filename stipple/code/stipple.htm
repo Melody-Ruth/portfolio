@@ -7,10 +7,11 @@
 <script type="text/javascript" src="../../resources/jquery.js"></script>
 <script src="../../jqueryScripts.js" type="text/JavaScript"></script>
 <link rel="stylesheet" type="text/css" href="../../main.css">
+<link rel="stylesheet" type="text/css" href="stipple.css">
 <script src="../../menu.js" type="text/JavaScript"></script>
 </head>
 
-<body onload="setUpSizeInput()">
+<body>
 <div onmousemove="mouseMoved()">
 <div id="menu">
 </div>
@@ -19,6 +20,9 @@
 </div>
 
 <div id="inputs">
+<p id="prompt">Choose an image (.png or .jpg) to transform, then press "Stipple!" to see the new image. 
+The uploaded image and the new image will appear below. 
+Right click on the new image and select "Save Image As..." to download it.</p>
 <input type="file" id="toStipple" />
 <input type="button" value="Stipple!" onClick="doStipple()"/>
 <img id="display-image" src="" />
