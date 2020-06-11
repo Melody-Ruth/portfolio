@@ -68,6 +68,9 @@ function mouseMoved() {
 function caveClicked() {
 	document.location = 'cave_flood/code/cave.htm';
 }
+function stippleClicked() {
+	document.location = 'stipple/code/stipple.htm';
+}
 function starClicked() {
 	document.location = 'star_wars/code/star.htm';
 }

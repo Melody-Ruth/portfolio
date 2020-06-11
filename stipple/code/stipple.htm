@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta http-equiv="Content-Type" content="text/html; charset=ascii" />
+<title>Stipple</title>
+    <script src="stipple.js" type="text/JavaScript"></script>
+<script type="text/javascript" src="../../resources/jquery.js"></script>
+<script src="../../jqueryScripts.js" type="text/JavaScript"></script>
+<link rel="stylesheet" type="text/css" href="../../main.css">
+<script src="../../menu.js" type="text/JavaScript"></script>
+</head>
+
+<body onload="setUpSizeInput()">
+<div onmousemove="mouseMoved()">
+<div id="menu">
+</div>
+<div id="title">
+<img src="../graphics/title.png">
+</div>
+
+<div id="inputs">
+<input type="file" id="toStipple" />
+<input type="button" value="Stipple!" onClick="doStipple()"/>
+<img id="display-image" src="" />
+</div>
+
+<div id="results">
+<img id="result-image" src="" />
+<img id="result-image2" src="" />
+
+<canvas id="testingCanvas"/>
+<canvas id="newCanvas"/>
+</div>
+</div>
+</body>
+
+</html> 
