@@ -77,3 +77,12 @@ function archeryClicked() {
 function artClicked() {
 	document.location = 'art_studio/code/Art_Studio.htm';
 }
+function fishClicked() {
+	document.location = 'fish_collector/code/fishCollector.htm';
+}
+function gingerbreadClicked() {
+	document.location = 'gingerbread/code/gingerbread.htm';
+}
+function EoMClicked() {
+	document.location = 'elements_of_magic/code/Elements_of_Magic.htm';
+}
