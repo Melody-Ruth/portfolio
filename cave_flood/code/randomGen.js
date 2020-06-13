@@ -1766,7 +1766,9 @@ var generateCapsule = function() {
 
 var randomGen;
 function setup() {
-	createCanvas(600,600);
+	var testCanvas = createCanvas(600,600);
+	testCanvas.parent('gameCanvas');
+	//testCanvas.position(0,0);
 	noFill();
 	noStroke();
 	background(2, 130, 194); //pick a color

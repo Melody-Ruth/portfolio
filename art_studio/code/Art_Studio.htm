@@ -4,6 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ascii" />
 <title>Art Studio</title>
 <link rel="stylesheet" type="text/css" href="../../main.css">
+<link rel="stylesheet" type="text/css" href="Art_Studio.css">
 <script type="text/javascript" src="../../resources/jquery.js"></script>
 <script src="../../jqueryScripts.js" type="text/JavaScript"></script>
 <script type="text/javascript" src="../../resources/processing-1.4.1.js"></script>
@@ -25,15 +26,56 @@ $(document).ready(function() {
 
 </head>
    
-<body style="background-color:#faf8ed;" onResize="">
+<body style="background-color:var(--tan1);" onResize="">
 <div onmousemove="mouseMoved()">
 <div id="menu">
 </div>
-
-<div id="main">
-
+<div>
+<div id="leftColumn">
 <canvas id='canvas1' style="border: 1px solid black;"></canvas>
-
+<div id="basicFacts">
+<h2 class="text spacing" id="programName">Art Studio</h2>
+<div id="dateLine" class="spacing">
+<p class="text alignLeft">Started: 2015</p> 
+<p class="text alignRight">Last Updated: 2019</p></div>
+</div>
+<div style="clear: both;"></div>
+<p class="text spacing">
+&nbsp;&nbsp;&nbsp;&nbsp;Art Studio is a painting tool. My goal was to provide basic drawing tool functionality while keeping the design intuitive
+and fun, with features represented by stylized versions of their real-world counterparts, rather than by menus and buttons.
+</p>
+</div>
+<div id="rightColumn">
+<div id="instructions" class="spacing">
+<h4 class="text spacing">Instructions:</h4>
+<p class="text spacing">&nbsp;&nbsp;&nbsp;&nbsp;
+Click on the brushes to use them. Click and drag to paint, or right click to fill the whole canvas. Click the pencil to use it.
+Holding right click with the pencil will erase (draw white). Click the undo button to undo the last stroke or paint fill.
+Click on the paint splotches in the palette to change colors, or click on the paint tube to select a color using rgb sliders.
+From the color picker, click the save icon to save the current color to one of the four slots. Click on any of the saved colors to switch to that color.
+Click on a saved color, then the trashcan icon, to remove it from its slot.
+Click the bowl of water to reduce the opacity of the paint. Click the paper towel to reset to fully opaque.
+</p>
+</div>
+<div id="changelog" class="rightColumn2 spacing">
+<h3 class="text spacing">Changelog</h2>
+<div class="text changelogEntry spacing">
+<h4>2019 1.4</h4>
+<p>Added a "water bowl" and "paper towel" which allow the user to control the opacity of the stroke.</p>
+</div>
+<div class="text changelogEntry spacing">
+<h4>2019 1.3</h4>
+<p>Added a color picker. Users can select colors, save them to four slots of storage, and remove colors from storage.</p>
+</div>
+</div>
+<div id="sourceCodeDiv" class="spacing">
+<a href="https://github.com/Melody-Ruth/programs-website/tree/master/art_studio"><p>Source Code</p></a>
+<p class="text license">The source code is licensed under</p> <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" class="license">Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)</a>
+</div>
+</div>
+<div style="clear: both;"></div>
+</div>
+<div id="footer">
 </div>
 </div>
 </body>

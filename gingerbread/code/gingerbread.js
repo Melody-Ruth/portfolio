@@ -1,3 +1,5 @@
+//Created by Melody Ruth. Licensed under Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)
+
 var myRed;
 var myOrange;
 var myYellow;
@@ -16,7 +18,8 @@ var darkBrown;
 
 function setup() {
 	angleMode(DEGREES);
-	createCanvas(400,400);
+	var testCanvas = createCanvas(400,400);
+	testCanvas.parent('gameCanvas');
 	noFill();
 	noStroke();
 	background(2, 130, 194); //pick a color

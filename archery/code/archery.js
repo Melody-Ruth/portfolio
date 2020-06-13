@@ -1,3 +1,5 @@
+//Created by Melody Ruth. Licensed under Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)
+
 function sketchProc(p) {
 	
 	// Khan Academy allows use of processing functions

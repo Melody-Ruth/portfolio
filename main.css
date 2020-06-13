@@ -11,11 +11,23 @@
 	--blue2: #97ccf7;
 	--blue3: #0275d4;
 	--blue4: #005fad;
+	--tan1: #faf8ed;
+	--tan2: #faf5d4;
 }
 .Button {
 	border: none;
 	font-size: 36px;
 	font-family:"Helvetica"
+}
+.text {
+	color:#302e13;
+	font-family:"Helvetica";
+}
+.alignLeft {
+	float:left;
+}
+.alignRight {
+	float:right;
 }
 #HomeButton {
 	background-color:var(--blue1);
@@ -70,4 +82,54 @@
 	position: absolute;
 	z-index: 1;
 	display:none;
+}
+
+#leftColumn {
+	display:inline-block;
+	width:400px;
+}
+
+#rightColumn {
+	display:inline-block;
+	width:calc(100% - 400px);
+	float:right;
+}
+
+#footer {
+	display:block;
+	text-align:center;
+	position:relative;
+}
+
+#basicFacts {
+	width:100%;
+	text-align:center;
+}
+.spacing {
+	margin-left:20px;
+	margin-right:20px;
+}
+
+#sourceCodeDiv {
+	text-align:center;
+}
+
+.license {
+	display:inline-block;
+}
+
+#changelog {
+	border:2px solid grey;
+	border-radius:5px;
+}
+
+#instructions {
+	border:2px solid grey;
+	border-radius:5px;
+	margin-top:20px;
+	margin-bottom:20px;
+}
+
+.changelogEntry {
+	background-color:var(--tan2);
 }
