@@ -147,3 +147,7 @@
 .changelogEntry {
 	background-color:var(--tan2);
 }
+
+.links {
+	font-family:"Helvetica";
+}
