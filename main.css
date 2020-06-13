@@ -105,6 +105,16 @@
 	width:100%;
 	text-align:center;
 }
+.spacingRight {
+	margin-left:10px;
+	margin-right:20px;
+}
+
+.spacingLeft {
+	margin-left:20px;
+	margin-right:10px;
+}
+
 .spacing {
 	margin-left:20px;
 	margin-right:20px;
@@ -128,6 +138,10 @@
 	border-radius:5px;
 	margin-top:20px;
 	margin-bottom:20px;
+}
+
+#canvas1 {
+	margin-top:20px;
 }
 
 .changelogEntry {

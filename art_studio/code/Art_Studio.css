@@ -1,11 +1,11 @@
 #rightColumn {
 	display:inline-block;
-	width:calc(100% - 500px);
+	width:calc(100% - 540px);
 	float:right;
 }
 
 #leftColumn {
 	display:inline-block;
-	width:500px;
+	width:540px;
 	float:left;
 }
