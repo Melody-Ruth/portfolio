@@ -86,12 +86,12 @@
 
 #leftColumn {
 	display:inline-block;
-	width:400px;
+	width:440px;
 }
 
 #rightColumn {
 	display:inline-block;
-	width:calc(100% - 400px);
+	width:calc(100% - 440px);
 	float:right;
 }
 
@@ -146,6 +146,7 @@
 
 .changelogEntry {
 	background-color:var(--tan2);
+	border-radius:3px;
 }
 
 .links {

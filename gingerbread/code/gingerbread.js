@@ -19,7 +19,7 @@ var darkBrown;
 function setup() {
 	angleMode(DEGREES);
 	var testCanvas = createCanvas(400,400);
-	testCanvas.parent('gameCanvas');
+	testCanvas.parent('canvas1');
 	noFill();
 	noStroke();
 	background(2, 130, 194); //pick a color

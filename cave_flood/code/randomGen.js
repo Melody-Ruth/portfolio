@@ -1767,7 +1767,7 @@ var generateCapsule = function() {
 var randomGen;
 function setup() {
 	var testCanvas = createCanvas(600,600);
-	testCanvas.parent('gameCanvas');
+	testCanvas.parent('canvas1');
 	//testCanvas.position(0,0);
 	noFill();
 	noStroke();

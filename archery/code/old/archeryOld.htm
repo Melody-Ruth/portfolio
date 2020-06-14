@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<!--
+	Created by Melody Ruth. Licensed under Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)
+	-->
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta http-equiv="Content-Type" content="text/html; charset=ascii" />
+<title>Archery</title>
+<link rel="stylesheet" type="text/css" href="../../main.css">
+<script type="text/javascript" src="../../resources/jquery.js"></script>
+<script src="../../jqueryScripts.js" type="text/JavaScript"></script>
+<script type="text/javascript" src="../../resources/processing-1.4.1.js"></script>
+<script src="../../menu.js" type="text/JavaScript"></script>
+<script type="text/javascript" src="archery.js"></script>
+<script type="text/javascript" src="archeryWeb.js"></script>
+
+<!-- wafjscacodeblockgroup, priority 15,  -->
+<script language="JavaScript1.2" >
+<!--
+
+var processing;
+$(document).ready(function() {
+	processing = new Processing(document.getElementById('canvas1'),sketchProc); 
+});
+
+//-->
+</script>
+
+</head>
+   
+<body style="background-color:var(--tan1);'" onResize="">
+<div onmousemove="mouseMoved()">
+<div id="menu">
+</div>
+
+<div id="leftColumn">
+<canvas id='canvas1' style="border: 1px solid black;"></canvas>
+<h2 class="text" align="center">Archery Game</h2>
+<div id="dateLine">
+<p class="text dates alignLeft">Started: 2015</p> 
+<p class="text dates alignRight">Last Updated: 2016</p></div>
+<div style="clear: both;"></div>
+<h4 class="text">Instructions:</h4>
+<p class="text">&nbsp;&nbsp;&nbsp;&nbsp;Aim with the mouse. Click to shoot. The closer to the center you hit, the more points you will receive. You only have ten arrows, so use them wisely. Good luck!</p>
+</div>
+<div id="rightColumn">
+<p style="padding-left:20px; padding-right:20px">
+I started this program in 2015, intending for it to be a mini-game for my Elements of Magic game.
+Although I did add it to my Elements of Magic program, it became a big project in its own right,
+ as this was the first time I experimented with rendering 3D objects to a 2D canvas.
+I used some basic geometry to determine where to draw the targets, grass, and arrow on the screen given their 3D locations.
+In 2019 I moved the program onto this website.
+</p>
+<div id="sourceCodeDiv">
+<a href="https://github.com/Melody-Ruth/programs-website/tree/master/archery"><p>Source Code</p></a>
+<p class="text license">The source code is licensed under</p> <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" class="license">Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)</a>
+</div>
+</div>
+<div id="footer">
+</div>
+</div>
+
+<!--
+<a href="../../index.htm"><h2>Home</h2></a>-->
+
+
+
+</body>
+</html> 
