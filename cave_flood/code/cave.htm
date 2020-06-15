@@ -1,28 +1,157 @@
 <!DOCTYPE html>
-  <head>
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<!--
+	Created by Melody Ruth. Licensed under Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)
+	-->
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta http-equiv="Content-Type" content="text/html; charset=ascii" />
 <title>Cave Flood</title>
 <link rel="stylesheet" type="text/css" href="../../main.css">
 <link rel="stylesheet" type="text/css" href="cave.css">
-    <script type="text/javascript" src="../../resources/p5.js"></script>
-    <script language="JavaScript1.2"></script>
-    <script src="randomGen.js"></script>
-	<script type="text/javascript" src="caveWeb.js"></script>
-	<script src="../../menu.js" type="text/JavaScript"></script>
-	<script type="text/javascript" src="../../resources/jquery.js"></script>
+<script type="text/javascript" src="../../resources/jquery.js"></script>
 <script src="../../jqueryScripts.js" type="text/JavaScript"></script>
-  </head>
-
-  <body style="background-color:#faf8ed;">
+<script type="text/javascript" src="../../resources/p5.js"></script>
+<script type="text/javascript" src="randomGen.js"></script>
+<script src="../../menu.js" type="text/JavaScript"></script>
+<script type="text/javascript" src="caveWeb.js"></script>
+</head>
+   
+<body style="background-color:var(--tan1);" onResize="">
 <div onmousemove="mouseMoved()">
 <div id="menu">
 </div>
+<div>
 <div id="leftColumn">
-<div id="canvas1">
+<div id="canvas1" class="spacing">
 </div>
-TESTING1</div>
-<div id="rightColumn">TESTING2</div>
+<div id="basicFacts" class="">
+<h2 class="text" id="programName">Cave Flood</h2>
+<div id="dateLine" class="spacing">
+<p class="text alignLeft">Started: 07/31/2019</p> 
+<p class="text alignRight">Last Updated: 2019</p></div>
 </div>
-  </body>
-</html>
+<div style="clear: both;"></div>
+<p class="text spacing">
+&nbsp;&nbsp;&nbsp;&nbsp;Cave Flood is a game in which the player explores a network of caves in search of crystals (which increase the player's score).
+The caves are very dark, but a small circle of light around the player is illuminated.
+The cave system is gradually flooding, and the player's light will go out when underwater.
+The goal is to make it out of the caves in the shortest time possible with the largest score possible.
+The player's only guide to the confusing cave system is a map which can only be accessed a few times and which fills in as the player explores the caves.
+The player can choose to either explore the main, pre-designed level or a randomly generated level.
+</p>
+<p class="text spacing">
+&nbsp;&nbsp;&nbsp;&nbsp;I coded the game in p5.js.
+The biggest challenges of the project were implemented physics and collision detection for the player's movement and dealing with image manipulation.
+For the first challenge, I wanted the player's ball avatar to be able to accelerate, collide, and roll through the caves, which are a mix of rectangular and circular shapes.
+For the second challenge, I wanted the objects in the cave to change color when underwater with a clear "water line" if only partially submerged.
+As an additional challenge, I wanted some of the crystal images to be rotated, without rotating the water line.
+I ended up using the image manipulation libraries of p5.js to edit the transparency of each row of pixels as the water level rose, as well as writing my own rotation function to create rotated versions of my crystal images (rather than rotating them as I drew them).
+</p>
+</div>
+<div id="rightColumn">
+<div id="instructions" class="spacing">
+<h4 class="text spacing">Instructions:</h4>
+<p class="text spacing">&nbsp;&nbsp;&nbsp;&nbsp;
+Move with the arrow keys. When in water, use the down arrow key to stop yourself from floating. Find crystals for extra points.
+While you're submerged in water, your torch is extinguished. Use the map to check where you are. It will fill in as you explore the caves.
+You have limited uses of the map, so choose wisely when to look at it.
+</p>
+</div>
+<div id="changelog" class="rightColumn2 spacing">
+<h3 class="text spacing">Changelog</h2>
+<div class="text changelogEntry spacing">
+<h4>1.2.0 12/13/2019</h4>
+<p>Settings page. Randomly generated map is now an option.</p>
+</div>
+<div class="text changelogEntry spacing">
+<h4>1.1.1 11/20/2019</h4>
+<p>Map limited to three uses. Map bug fixing.</p>
+</div>
+<div class="text changelogEntry spacing">
+<h4>1.1.0 11/11/2019</h4>
+<p>Unlimited use map. (shows a scaled version of the cave system, with only parts the player has been in revealed)</p>
+</div>
+<div class="text changelogEntry spacing">
+<h4>1.0.0 11/2/2019</h4>
+<p>Complete first level design, updated menu</p>
+</div>
+<div class="text changelogEntry spacing">
+<h4>0.10.0 08/31/2019</h4>
+<p>Light effects: When the player is submerged in water, very dark everywhere. When the player is deep in the caves but not submerged in water, very dark everywhere except a small circle around the player.
+When the player is near the surface, gradient from very dark to no effect, with it getting lighter the closer to the surface the player is.
+With this update, all of the major features were in place: player physics, cave types, collectable crystals, water, and lighting effects.</p>
+</div>
+<div class="text changelogEntry spacing">
+<h4>0.9.0 08/31/2019</h4>
+<p>Game now recognizes multiple keys being pressed at once (so the player can move left and right while jumping without losing momentum)</p>
+</div>
+<div class="text changelogEntry spacing">
+<h4>0.8.1 08/31/2019</h4>
+<p>Player no longer appears to be submerged in water while above ground.</p>
+</div>
+<div class="text changelogEntry spacing">
+<h4>0.8.0 08/24/2019</h4>
+<p>Switched from processing.js to p5.js for better image manipulation libraries. Player now floats in water.</p>
+</div>
+<div class="text changelogEntry spacing">
+<h4>0.7.0 08/18/2019</h4>
+<p>Added water. The water level gradually rises from not visible to level with the surface, changing the color of the caves and crystals appropriately.
+Currently no effect on player physics.</p>
+</div>
+<div class="text changelogEntry spacing">
+<h4>0.6.0 08/11/2019</h4>
+<p>Crystals which can be collected to increase the player's score.</p>
+</div>
+<div class="text changelogEntry spacing">
+<h4>0.5.0 08/11/2019</h4>
+<p>Colors changed to represent ground, grass and sky. Ability to leave the cave system to go above ground.</p>
+</div>
+<div class="text changelogEntry spacing">
+<h4>0.4.0 08/10/2019</h4>
+<p>Camera moves to follow the ball when it starts to get out of the screen.</p>
+</div>
+<div class="text changelogEntry spacing">
+<h4>0.3.4 08/10/2019</h4>
+<p>Rectangular passages that can connect multiple shapes together.</p>
+</div>
+<div class="text changelogEntry spacing">
+<h4>0.3.3 08/10/2019</h4>
+<p>Reverse capsules</p>
+</div>
+<div class="text changelogEntry spacing">
+<h4>0.3.2 08/09/2019</h4>
+<p>Capsule (rectangle with a semi-circle on either end) enclosures.</p>
+</div>
+<div class="text changelogEntry spacing">
+<h4>0.3.1 08/09/2019</h4>
+<p>Reverse circles (objects rather than enclosures)</p>
+</div>
+<div class="text changelogEntry spacing">
+<h4>0.3.0 08/09/2019</h4>
+<p>New circular enclosure for ball to interact with.</p>
+</div>
+<div class="text changelogEntry spacing">
+<h4>0.2.1 08/09/2019</h4>
+<p>Multiple ramps (can now be at any angle).</p>
+</div>
+<div class="text changelogEntry spacing">
+<h4>0.2.0 08/09/2019</h4>
+<p>Ball controlled by arrow keys. Interaction with floor and ramp.</p>
+</div>
+<div class="text changelogEntry spacing">
+<h4>0.1.0 07/31/2019</h4>
+<p>Menu with working buttons, instructions page.</p>
+</div>
+</div>
+<div id="sourceCodeDiv" class="spacing">
+<a href="https://github.com/Melody-Ruth/programs-website/tree/master/cave_flood" class="links"><p>Source Code for Cave Flood</p></a>
+<p class="text license">The source code is licensed under</p> <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" class="links license">Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)</a>
+</div>
+</div>
+<div style="clear: both;"></div>
+</div>
+<div id="footer">
+</div>
+</div>
+</body>
+</html> 

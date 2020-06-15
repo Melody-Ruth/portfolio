@@ -1,7 +1,11 @@
-#leftColumn {
-	display:inline-block;
-}
-
 #rightColumn {
 	display:inline-block;
+	width:calc(100% - 640px);
+	float:right;
+}
+
+#leftColumn {
+	display:inline-block;
+	width:640px;
+	float:left;
 }
