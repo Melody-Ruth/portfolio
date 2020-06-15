@@ -125,9 +125,9 @@ function sketchProc(p) {
 	var staffCursor = true;
 	var sound = false;//Change this to toggle sound
 	//You can change the character's hair color. Change this variable to black, light brown, red, blonde or dark brown.
-	var hairColor = "dark brown";
+	var hairColor = "black";
 	//You can also change the character's skin color. Sorry for the lack of options; choose light or dark.
-	var skinColor = "light";
+	var skinColor = "dark";
 	var gender = "girl"; //girl or boy?
 	//A tip: If there's a person, they most likely have something helpful to say. Click on them to find out what it is.
 	//You will come across coins (yellow-orange circles). Pick them up. They give you 5 coins.
@@ -136,10 +136,7 @@ function sketchProc(p) {
 
 	//basic
 	//b to go back (it doesn't work with the first menus)
-	//i to open your inventory (WIP)
-	//p to see your level and xp and to change your character's outfit (not done yet)
-	//m to open your map (no map yet)
-	//s to save (no save yet)
+	//p to see your level and xp
 	//q to open your quests
 
 	//food

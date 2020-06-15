@@ -1,15 +1,19 @@
 <!DOCTYPE html>
+<!--
+	Created by Melody Ruth. Licensed under Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)
+	-->
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta http-equiv="Content-Type" content="text/html; charset=ascii" />
 <title>Elements of Magic</title>
 <link rel="stylesheet" type="text/css" href="../../main.css">
 <script type="text/javascript" src="../../resources/jquery.js"></script>
-<script type="text/javascript" src="../../resources/processing-1.4.1.js"></script>
 <script src="../../jqueryScripts.js" type="text/JavaScript"></script>
+<script type="text/javascript" src="../../resources/processing-1.4.1.js"></script>
 <script type="text/javascript" src="Elements_of_Magic.js"></script>
-<script type="text/javascript" src="Elements_of_Magic_Web.js"></script>
 <script src="../../menu.js" type="text/JavaScript"></script>
+<script type="text/javascript" src="Elements_of_Magic_Web.js"></script>
+
 <!-- wafjscacodeblockgroup, priority 15,  -->
 <script language="JavaScript1.2" >
 <!--
@@ -24,15 +28,96 @@ $(document).ready(function() {
 
 </head>
    
-<body style="background-color:#faf8ed;" onResize="">
+<body style="background-color:var(--tan1);" onResize="">
 <div onmousemove="mouseMoved()">
 <div id="menu">
 </div>
-
-<div id="main">
-
-<canvas id='canvas1' style="border: 1px solid black;"></canvas>
-
+<div>
+<div id="leftColumn">
+<canvas id='canvas1' class="spacing" style="border: 1px solid black;"></canvas>
+<div id="basicFacts" class="">
+<h2 class="text" id="programName">Elements of Magic</h2>
+<div id="dateLine" class="spacing">
+<p class="text alignLeft">Started: 2015</p> 
+<p class="text alignRight">Last Updated: 2017</p></div>
+</div>
+<div style="clear: both;"></div>
+<p class="text spacing">
+&nbsp;&nbsp;&nbsp;&nbsp;Elements of Magic is in game in which the player explores a magical school as a student.
+The player can complete quests and play mini-games.
+</p>
+</div>
+<div id="rightColumn">
+<div id="instructions" class="spacing">
+<h4 class="text spacing">Instructions:</h4>
+<p class="text spacing">&nbsp;&nbsp;&nbsp;&nbsp;
+The staff is your cursor. It glows more when you're over a button. If you come across a person, they most likely have something helpful to say.
+Click on them to find out what it is. You will come across coins (yellow-orange circles). Pick them up. They give you 5 coins.
+You can spend coins at the shop in the cafeteria.
+<br>
+Key Guide:
+<br>
+	basic
+	b to go back (it doesn't work with the first menus)
+	q to open your quests
+<br>
+	food
+	w to drink water
+	t to eat trail mix
+	a to eat an apple
+<br>
+	spells
+	Fire spells:
+	h to cast Spark
+	j to cast Flame
+	k to cast Burn
+	l to cast Fire
+<br>
+	Water spells:
+	h to cast Droplet
+	j to cast Stream
+	k to cast River
+	l to cast Ocean
+<br>
+	Earth spells:
+	h to cast Pebble
+	j to cast Rock
+	k to cast Boulder
+	l to cast Earthquake
+<br>
+	Air spells:
+	h to cast Breeze
+	j to cast Gust
+	k to cast Wind
+	l to cast Tornado
+<br>
+	Light spells:
+	h to cast Shine
+	j to cast Glow
+	k to cast Illumminate
+	l to cast Light
+<br>
+	Darkness spells:
+	h to cast Shadow
+	j to cast Darknen
+	k to cast Night
+	l to cast Darkness
+<br>
+	Nature spells:
+	h to cast Seed
+	j to cast Sapling
+	k to cast Protect
+	l to cast Grow
+</p>
+</div>
+<div id="sourceCodeDiv" class="spacing">
+<a href="https://github.com/Melody-Ruth/programs-website/tree/master/elements_of_magic" class="links"><p>Source Code for Elements of Magic</p></a>
+<p class="text license">The source code is licensed under</p> <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" class="links license">Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)</a>
+</div>
+</div>
+<div style="clear: both;"></div>
+</div>
+<div id="footer">
 </div>
 </div>
 </body>
