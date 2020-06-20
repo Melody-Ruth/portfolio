@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<!--
+	Created by Melody Ruth. Licensed under Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)
+	-->
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta http-equiv="Content-Type" content="text/html; charset=ascii" />
+<title>Puzzle</title>
+<script type="text/javascript" src="../../resources/p5.js"></script>
+<!--<script type="text/javascript" src="resources/p5.sound.js"></script>-->
+<script type="text/javascript" src="puzzle.js"></script>
+<script type="text/javascript" src="puzzleWeb.js"></script>
+<script type="text/javascript" src="../../resources/jquery.js"></script>
+<script src="../../jqueryScripts.js" type="text/JavaScript"></script>
+<link rel="stylesheet" type="text/css" href="../../main.css">
+<script src="../../menu.js" type="text/JavaScript"></script>
+<style>
+	.puzzleInput {
+		display:inline-block;
+	}
+</style>
+</head>
+<body onload="setUp()" onresize="handleResize()" style="background-color:var(--tan1);">
+<div onmousemove="mouseMoved()">
+<div id="menu"></div>
+<div id="puzzleInputs">
+<p class="puzzleInput">Rows of pieces: </p>
+<input type="number" class="puzzleInput" id="inputRows" onChange="handleSizeInput()"/>
+<p class="puzzleInput">Columns of pieces: </p>
+<input type="number" class="puzzleInput" id="inputColumns" onChange="handleSizeInput()"/>
+<input type="file" class="puzzleInput" id="toPuzzle" onChange="handleImageUpload()"/>
+<input type="button" class="puzzleInput" value="Make a Puzzle!" onClick="setUpPuzzle()"/>
+</div>
+<img id="display-image" src="" />
+<div id="canvas1" class="spacing">
+</div>
+<div id="leftColumn">
+<div id="instructions" class="spacing">
+<h4 class="text spacing">Instructions:</h4>
+<p class="text spacing">&nbsp;&nbsp;&nbsp;&nbsp;
+Enter the number of rows and columns (each must be between 1 and 16) you want your puzzle to have, then upload an image.
+Press "Make a Puzzle!" to generate the puzzle. Click and drag to move the puzzle pieces.
+If two puzzle pieces that go with each other are moved next to each other and aren't currently being dragged, they will snap into place.
+Click "Show Complete Image" to see the photo you uploaded. You can drag it around. Click outside of the image to close it and resume working on the puzzle.
+</p>
+</div>
+<div id="sourceCodeDiv" class="spacing">
+<a href="https://github.com/Melody-Ruth/programs-website/tree/master/puzzle" class="links"><p>Source Code for Jigsaw Puzzle Maker</p></a>
+<p class="text license">The source code is licensed under</p> <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" class="links license">Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)</a>
+</div>
+</div>
+<div id="rightColumn">
+<div id="changelog" class="spacing" style="margin-top:20px;">
+<h3 class="text spacing">Changelog</h2>
+<div class="text changelogEntry spacing">
+<h4>1.3.0 06/19/2020</h4>
+<p>Added confetti and "Congratulations!" message</p>
+</div>
+<div class="text changelogEntry spacing">
+<h4>1.2.3 06/19/2020</h4>
+<p>Puzzle pieces can't fully leave canvas. r & c inputted by user</p>
+</div>
+<div class="text changelogEntry spacing">
+<h4>1.2.2 06/19/2020</h4>
+<p>Bug fix: inward knobs no longer occasionally overlap</p>
+</div>
+<div class="text changelogEntry spacing">
+<h4>1.2.1 06/19/2020</h4>
+<p>Multiple possible knob shapes</p>
+</div>
+<div class="text changelogEntry spacing">
+<h4>1.2.0 06/18/2020</h4>
+<p>Switched the way knobs are added. Now knobs have random position. Also got rid of more white lines.</p>
+</div>
+<div class="text changelogEntry spacing">
+<h4>1.1.1 06/17/2020</h4>
+<p>Pieces can know be picked up by their knobs and not by places where they have holes.
+Got rid of the white band on the bottom of the puzzle (now crop image to be divisible by r and c)</p>
+</div>
+<div class="text changelogEntry spacing">
+<h4>1.1.0 06/17/2020</h4>
+<p>Pieces are now "puzzle piece" shaped (rectangles with knobs going in and out that match up when the pieces click together).</p>
+</div>
+<div class="text changelogEntry spacing">
+<h4>1.0.3 06/17/2020</h4>
+<p>Canvas size based on window</p>
+</div>
+<div class="text changelogEntry spacing">
+<h4>1.0.2 06/17/2020</h4>
+<p>Puzzle pieces start in the center and scatter</p>
+</div>
+<div class="text changelogEntry spacing">
+<h4>1.0.1 06/17/2020</h4>
+<p>Image automatically resized to keep proportions, but not have height greater than 80% of canvas height or width greater than 80% of canvas width.</p>
+</div>
+<div class="text changelogEntry spacing">
+<h4>1.0.0 06/17/2020</h4>
+<p>Image split into r*c movable pieces that "click" together. When you have finished the puzzle, celebratory text displays on the screen.</p>
+</div>
+<div class="text changelogEntry spacing">
+<h4>0.1.0 06/16/2020</h4>
+<p>Uploaded image gets split into r*c draggable, rectangular pieces.</p>
+</div>
+</div>
+</div>
+<div style="clear: both;"></div>
+<div id="footer" style="padding-top:20px"></div>
+</div>
+</body>

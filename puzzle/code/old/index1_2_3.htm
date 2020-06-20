@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<!--
+	Created by Melody Ruth. Licensed under Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)
+	-->
+<!--
+	Part of the 1.2.3 update. r and c now chosen by the user
+	-->
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta http-equiv="Content-Type" content="text/html; charset=ascii" />
+<title>Puzzle</title>
+<script type="text/javascript" src="resources/p5.js"></script>
+<script type="text/javascript" src="resources/p5.sound.js"></script>
+<script type="text/javascript" src="puzzle.js"></script>
+<script type="text/javascript" src="puzzleWeb.js"></script>
+<style>
+	.puzzleInput {
+		display:inline-block;
+	}
+</style>
+</head>
+<body onload="setUp()" onresize="handleResize()">
+<div id="puzzleInputs">
+<p class="puzzleInput">Rows of pieces: </p>
+<input type="number" class="puzzleInput" id="inputRows" onChange="handleSizeInput()"/>
+<p class="puzzleInput">Columns of pieces: </p>
+<input type="number" class="puzzleInput" id="inputColumns" onChange="handleSizeInput()"/>
+<input type="file" class="puzzleInput" id="toPuzzle" onChange="handleImageUpload()"/>
+<input type="button" class="puzzleInput" value="Make Puzzle!" onClick="setUpPuzzle()"/>
+</div>
+<img id="display-image" src="" />
+<div id="canvas1" class="spacing">
+</div>
+</body>
