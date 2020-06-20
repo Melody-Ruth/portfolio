@@ -66,7 +66,7 @@ function mouseMoved() {
 }
 
 function puzzleClicked() {
-	document.location = '../../puzzle/code/puzzle.htm';
+	document.location = 'puzzle/code/puzzle.htm';
 }
 function caveClicked() {
 	document.location = 'cave_flood/code/cave.htm';
