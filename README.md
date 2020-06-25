@@ -1,4 +1,4 @@
-# Portfolio
+# Portfolio Website
 
 ##### License
 The files in this repository created by Melody Ruth are licensed under [Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)](https://creativecommons.org/licenses/by-nc-sa/3.0/).
