@@ -1,17 +1,19 @@
 <!DOCTYPE html>
+<!--
+	Created by Melody Ruth. Licensed under Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)
+	-->
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta http-equiv="Content-Type" content="text/html; charset=ascii" />
 <title>Star Tours</title>
 <link rel="stylesheet" type="text/css" href="../../main.css">
 <script type="text/javascript" src="../../resources/jquery.js"></script>
-<script type="text/javascript" src="../../resources/processing-1.4.1.js"></script>
 <script src="../../jqueryScripts.js" type="text/JavaScript"></script>
+<script type="text/javascript" src="../../resources/processing-1.4.1.js"></script>
 <script type="text/javascript" src="star.js"></script>
-<script type="text/javascript" src="starWeb.js"></script>
 <script src="../../menu.js" type="text/JavaScript"></script>
+<script type="text/javascript" src="starWeb.js"></script>
 
-<!-- wafjscacodeblockgroup, priority 15,  -->
 <script language="JavaScript1.2" >
 <!--
 
@@ -22,18 +24,44 @@ $(document).ready(function() {
 
 //-->
 </script>
-
 </head>
    
-<body style="background-color:#faf8ed;" onResize="">
+<body style="background-color:var(--tan1);" onResize="">
 <div onmousemove="mouseMoved()">
 <div id="menu">
 </div>
-
-<div id="main">
-
-<canvas id='canvas1' style="border: 1px solid black;"></canvas>
-
+<div>
+<div id="leftColumn">
+<canvas id='canvas1' class="spacing" style="border: 1px solid black;"></canvas>
+<div id="basicFacts" class="spacing">
+<h2 class="text" id="programName">Star Tours Simulation</h2>
+<div id="dateLine" class="spacing">
+<p class="text alignLeft">Started: 2019</p> 
+<p class="text alignRight">Last Updated: 2019</p></div>
+</div>
+<div style="clear: both;"></div>
+<p class="text spacing">
+&nbsp;&nbsp;&nbsp;&nbsp;I coded this project in spring 2019. It's based on the Star Tours ride at Disneyland.
+Each time you watch the simulation, it will choose a different bad guy, first planet, and second planet to display.
+While working on this project I expanded my graphics skills beyond what I learned making the archery game.
+In particular, I figured out how to display cubes moving in 3D space.
+</p>
+</div>
+<div id="rightColumn">
+<div id="instructions" class="spacing">
+<h4 class="text spacing">Instructions:</h4>
+<p class="text spacing">&nbsp;&nbsp;&nbsp;&nbsp;
+Click Start to begin the simulation. Click to skip to the next scene. Reload to watch it again.
+</p>
+</div>
+<div id="sourceCodeDiv" class="spacing">
+<a href="https://github.com/Melody-Ruth/programs-website/tree/master/star_wars" class="links"><p>Source Code for Star Tours</p></a>
+<p class="text license">The source code is licensed under</p> <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" class="links license">Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)</a>
+</div>
+</div>
+<div style="clear: both;"></div>
+</div>
+<div id="footer">
 </div>
 </div>
 </body>

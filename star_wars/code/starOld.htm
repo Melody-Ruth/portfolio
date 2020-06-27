@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta http-equiv="Content-Type" content="text/html; charset=ascii" />
+<title>Star Tours</title>
+<link rel="stylesheet" type="text/css" href="../../main.css">
+<script type="text/javascript" src="../../resources/jquery.js"></script>
+<script type="text/javascript" src="../../resources/processing-1.4.1.js"></script>
+<script src="../../jqueryScripts.js" type="text/JavaScript"></script>
+<script type="text/javascript" src="star.js"></script>
+<script type="text/javascript" src="starWeb.js"></script>
+<script src="../../menu.js" type="text/JavaScript"></script>
+
+<!-- wafjscacodeblockgroup, priority 15,  -->
+<script language="JavaScript1.2" >
+<!--
+
+var processing;
+$(document).ready(function() {
+	processing = new Processing(document.getElementById('canvas1'),sketchProc); 
+});
+
+//-->
+</script>
+
+</head>
+   
+<body style="background-color:#faf8ed;" onResize="">
+<div onmousemove="mouseMoved()">
+<div id="menu">
+</div>
+
+<div id="main">
+
+<canvas id='canvas1' style="border: 1px solid black;"></canvas>
+
+</div>
+</div>
+</body>
+</html> 
