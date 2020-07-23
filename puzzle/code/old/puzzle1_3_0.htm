@@ -18,29 +18,18 @@
 	.puzzleInput {
 		display:inline-block;
 	}
-	#puzzleInputs {
-		padding-left:20px;
-		padding-right:20px;
-	}
 </style>
 </head>
 <body onload="setUp()" onresize="handleResize()" style="background-color:var(--tan1);">
 <div onmousemove="mouseMoved()">
 <div id="menu"></div>
 <div id="puzzleInputs">
-<div id="leftSide" style="float:left">
-<p class="text puzzleInput">Rows of pieces: </p>
+<p class="puzzleInput">Rows of pieces: </p>
 <input type="number" class="puzzleInput" id="inputRows" onChange="handleSizeInput()"/>
-<p class="text puzzleInput">Columns of pieces: </p>
+<p class="puzzleInput">Columns of pieces: </p>
 <input type="number" class="puzzleInput" id="inputColumns" onChange="handleSizeInput()"/>
 <input type="file" class="puzzleInput" id="toPuzzle" onChange="handleImageUpload()"/>
 <input type="button" class="puzzleInput" value="Make a Puzzle!" onClick="setUpPuzzle()"/>
-</div>
-<div id="rightSide" style="float:right">
-<p class="text puzzleInput">Change background color: </p>
-<input type="color" class="puzzleInput" id="bgColor" onChange="bgButton()"/>
-</div>
-<div style="clear: both;"></div>
 </div>
 <img id="display-image" src="" />
 <div id="canvas1" class="spacing">
@@ -53,7 +42,6 @@ Enter the number of rows and columns (each must be between 1 and 16) you want yo
 Press "Make a Puzzle!" to generate the puzzle. Click and drag to move the puzzle pieces.
 If two puzzle pieces that go with each other are moved next to each other and aren't currently being dragged, they will snap into place.
 Click "Show Complete Image" to see the photo you uploaded. You can drag it around. Click outside of the image to close it and resume working on the puzzle.
-Click the "Change Background Color" button at any time to select a color for the "puzzle mat."
 </p>
 </div>
 <div id="sourceCodeDiv" class="spacing">
@@ -64,10 +52,6 @@ Click the "Change Background Color" button at any time to select a color for the
 <div id="rightColumn">
 <div id="changelog" class="spacing" style="margin-top:20px;">
 <h3 class="text spacing">Changelog</h2>
-<div class="text changelogEntry spacing">
-<h4>1.3.1 07/23/2020</h4>
-<p>Added change background color button</p>
-</div>
 <div class="text changelogEntry spacing">
 <h4>1.3.0 06/19/2020</h4>
 <p>Added confetti and "Congratulations!" message</p>
