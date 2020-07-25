@@ -1,5 +1,7 @@
 //Created by Melody Ruth. Licensed under Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)
 
+//Added saving puzzle
+
 function startSketch(loadingSaved){
 	var sketch = function(p) {
 		var saveButton;
