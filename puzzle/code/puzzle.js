@@ -1,7 +1,10 @@
 //Created by Melody Ruth. Licensed under Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)
 
-function startSketch(){
+//Added change background color button
+
+function startSketch(loadingSaved){
 	var sketch = function(p) {
+		var saveButton;
 		var counter = 0;
 		var mouseIsReleased = false;
 		var notCropped;
@@ -57,7 +60,10 @@ function startSketch(){
 		var testSound;
 		
 		p.preload = function() {
-			notCropped = p.loadImage(testingSource);
+			imageTooLarge = p.getItem("imageTooLarge");
+			if (!loadingSaved || imageTooLarge) {
+				notCropped = p.loadImage(testingSource);
+			}
 			
 			topOut[0] = p.loadImage("../graphics/top_out.png");
 			topOut[1] = p.loadImage("../graphics/top_out2.png");
@@ -149,6 +155,12 @@ function startSketch(){
 				p.image(pieceImages[this.index],this.x-pieceImageTallW/2,this.y-pieceImageWideH/2);
 				//console.log(this.x,this.y);
 			};
+			piece.setPosition = function(newX, newY) {
+				this.x = newX;
+				this.y = newY;
+				this.xSpeed = 0;
+				this.ySpeed = 0;
+			}
 			piece.beginningMoveIt = function() {
 				this.x += this.xSpeed;
 				this.y += this.ySpeed;
@@ -373,17 +385,50 @@ function startSketch(){
 			p.background(2, 130, 194); //pick a color
 			
 			showImage = newButton(canvasWidth*0.85, canvasHeight*0.84, canvasWidth*0.14, canvasHeight*0.14, "Show Complete Image",0);
+			savePuzzle = newButton(canvasWidth*0.9, canvasHeight*0.02, canvasWidth*0.09, canvasHeight*0.14, "Save Puzzle",0);
 			
-			var sizeScale = Math.min(1,canvasWidth*0.8/notCropped.width,canvasHeight*0.8/notCropped.height);
-			imageW = Math.round(notCropped.width*sizeScale);
-			imageH = Math.round(notCropped.height*sizeScale);
-			notCropped.resize(imageW,imageH);
-			var newW = Math.floor(imageW/(c*knobW))*c*knobW;
-			var newH = Math.floor(imageH/(r*knobH))*r*knobH;
-			newW = Math.floor(imageW/(c*3))*c*3;
-			newH = Math.floor(imageH/(r*3))*r*3;
+			if (!loadingSaved) {
+				var sizeScale = Math.min(1,canvasWidth*0.8/notCropped.width,canvasHeight*0.8/notCropped.height);
+				var wouldBePixels = notCropped.width * notCropped.height * 4 * sizeScale * sizeScale;
+				if (wouldBePixels > 630000) {
+					wouldBePixels = notCropped.width * notCropped.height * 4;
+					//sizeScale = Math.sqrt(630000 / wouldBePixels);
+				}
+				imageW = Math.round(notCropped.width*sizeScale);
+				imageH = Math.round(notCropped.height*sizeScale);
+				notCropped.resize(imageW,imageH);
+			} else if (!imageTooLarge) {
+				imageW = p.getItem("imageW");
+				imageH = p.getItem("imageH");
+				r = p.getItem("rows");
+				c = p.getItem("columns");
+			} else {//Loading a saved puzzle with a too-large image
+				r = p.getItem("rows");
+				c = p.getItem("columns");
+				var sizeScale = Math.min(1,canvasWidth*0.8/notCropped.width,canvasHeight*0.8/notCropped.height);
+				var wouldBePixels = notCropped.width * notCropped.height * 4 * sizeScale * sizeScale;
+				if (wouldBePixels > 630000) {
+					wouldBePixels = notCropped.width * notCropped.height * 4;
+					//sizeScale = Math.sqrt(630000 / wouldBePixels);
+				}
+				imageW = Math.round(notCropped.width*sizeScale);
+				imageH = Math.round(notCropped.height*sizeScale);
+				notCropped.resize(imageW,imageH);
+			}
+			var newW = Math.floor(imageW/(c*3))*c*3;
+			var newH = Math.floor(imageH/(r*3))*r*3;
+			
 			puzzleImage = p.createImage(newW, newH);
-			puzzleImage.copy(notCropped,0,0,newW,newH,0,0,newW,newH);
+			if (!loadingSaved || imageTooLarge) {
+				puzzleImage.copy(notCropped,0,0,newW,newH,0,0,newW,newH);
+			} else {
+				var testArray = p.getItem("puzzleImagePixels");
+				puzzleImage.loadPixels();
+				for (var i = 0; i < testArray.length; i++) {
+					puzzleImage.pixels[i] = testArray[i];
+				}
+				puzzleImage.updatePixels();
+			}
 			
 			pieceW = puzzleImage.width/c;
 			pieceH = puzzleImage.height/r;
@@ -420,176 +465,333 @@ function startSketch(){
 			puzzleImage2.copy(puzzleImage,0,0,imageW,imageH,knobW,knobH,imageW,imageH);
 			
 			//Make puzzle pieces
-			
-			for (var i = 0; i < r*c; i++) {
-				pieceImages[i] = p.createImage(pieceImageWideW,pieceImageTallH);
-				pieceImages[i].copy(puzzleImage2,(i%c)*pieceW,Math.floor(i/c)*pieceH,pieceImageWideW,pieceImageTallH,0,0,pieceImageWideW,pieceImageTallH);
-				//Start with border invisible:
-				var tempWidth = pieceImages[i].width;
-				var tempHeight = pieceImages[i].height;
-				var othercount = 0;
-				pieceImages[i].loadPixels();
-				for (var j = 0; j < pieceImageTallH; j++) {
-					for (var k = 0; k < knobW; k++) {
-						pieceImages[i].pixels[4*(j*tempWidth+k)+3] = 0;
-					}
-				}
-				for (var j = 0; j < pieceImageTallH; j++) {
-					for (var k = tempWidth-knobW; k < tempWidth; k++) {
-						pieceImages[i].pixels[4*(j*tempWidth+k)+3] = 0;
-					}
-				}
-				for (var j = 0; j < knobH; j++) {
-					for (var k = knobW; k < tempWidth-knobW; k++) {
-						pieceImages[i].pixels[4*(j*tempWidth+k)+3] = 0;
-					}
-				}
-				for (var j = tempHeight-knobH; j < tempHeight; j++) {
-					for (var k = knobW; k < tempWidth-knobW; k++) {
-						pieceImages[i].pixels[4*(j*tempWidth+k)+3] = 0;
-					}
-				}
-				//Top:
-				if (i < c) {
-					//It's a top piece. We're done here!
-				} else if (goesDown[i-c]) {
-					//The one above us goes out, so we need to go in
-					othercount = 0;
-					bottomOut[downType[i-c]].loadPixels();
-					for (var j = knobH; j < knobH*2; j++) {
-						for (var k = downX[i-c]; k < downX[i-c]+knobW; k++) {
-							pieceImages[i].pixels[4*(j*tempWidth+k)+3] = 255-bottomOut[downType[i-c]].pixels[othercount+3];
-							othercount+=4;
-						}
-					}
-					bottomOut[downType[i-c]].updatePixels();
-				} else {
-					//The one above us goes in, so we need to go out
-					othercount = 0;
-					topOut[downType[i-c]].loadPixels();
-					for (var j = 0; j < knobH; j++) {
-						for (var k = downX[i-c]; k < downX[i-c]+knobW; k++) {
-							pieceImages[i].pixels[4*(j*tempWidth+k)+3] = topOut[downType[i-c]].pixels[othercount+3];
-							othercount+=4;
-						}
-					}
-					topOut[downType[i-c]].updatePixels();
-				}
-				//Bottom:
-				if (i >= (r-1)*c) {
-					goesDown[i] = false;
-					//It's a bottom piece. We're done here!
-				} else if (Math.random() < 0.5) {
-					//We're going to go in!
-					othercount = 0;
-					goesDown[i] = false;
-					var maxX = Math.round(knobW*5/2);
-					var minX = Math.round(knobW*3/2);
-					if (i % c != 0 && goesRight[i-1] && rightY[i-1] > 2*knobH) {
-						minX = knobW*2;
-					}
-					downX[i] = Math.round(p.random(minX,maxX));
-					downType[i] = Math.floor(p.random(topOut.length));
-					topOut[downType[i]].loadPixels();
-					for (var j = tempHeight-knobH*2; j < tempHeight-knobH; j++) {
-						for (var k = downX[i]; k < downX[i]+knobW; k++) {
-							pieceImages[i].pixels[4*(j*tempWidth+k)+3] = 255-topOut[downType[i]].pixels[othercount+3];
-							othercount+=4;
-						}
-					}
-					topOut[downType[i]].updatePixels();
-				} else {
-					//We're going to go out!
-					othercount = 0;
-					goesDown[i] = true;
-					downX[i] = Math.round(p.random(Math.round(knobW*3/2),Math.round(knobW*5/2)));
-					downType[i] = Math.floor(p.random(topOut.length));
-					bottomOut[downType[i]].loadPixels();
-					for (var j = tempHeight-knobH; j < tempHeight; j++) {
-						for (var k = downX[i]; k < downX[i]+knobW; k++) {
-							pieceImages[i].pixels[4*(j*tempWidth+k)+3] = bottomOut[downType[i]].pixels[othercount+3];
-							othercount+=4;
-						}
-					}
-					bottomOut[downType[i]].updatePixels();
-				}
-				//Left:
-				if (i % c == 0) {
-					//It's a side piece. We're done here!
-				} else if (goesRight[i-1]) {
-					//The one to the left of us goes out, so we need to go in
-					othercount = 0;
-					rightOut[rightType[i-1]].loadPixels();
-					for (var j = rightY[i-1]; j < rightY[i-1]+knobH; j++) {
-						for (var k = knobW; k < knobW*2; k++) {
-							pieceImages[i].pixels[4*(j*tempWidth+k)+3] = 255-rightOut[rightType[i-1]].pixels[othercount+3];
-							othercount+=4;
-						}
-					}
-					rightOut[rightType[i-1]].updatePixels();
-				} else {
-					//The one to the left of us goes in, so we need to go out
-					othercount = 0;
-					leftOut[rightType[i-1]].loadPixels();
-					for (var j = rightY[i-1]; j < rightY[i-1]+knobH; j++) {
+			if (!loadingSaved) {
+				for (var i = 0; i < r*c; i++) {
+					pieceImages[i] = p.createImage(pieceImageWideW,pieceImageTallH);
+					pieceImages[i].copy(puzzleImage2,(i%c)*pieceW,Math.floor(i/c)*pieceH,pieceImageWideW,pieceImageTallH,0,0,pieceImageWideW,pieceImageTallH);
+					//Start with border invisible:
+					var tempWidth = pieceImages[i].width;
+					var tempHeight = pieceImages[i].height;
+					var othercount = 0;
+					pieceImages[i].loadPixels();
+					for (var j = 0; j < pieceImageTallH; j++) {
 						for (var k = 0; k < knobW; k++) {
-							pieceImages[i].pixels[4*(j*tempWidth+k)+3] = leftOut[rightType[i-1]].pixels[othercount+3];
-							othercount+=4;
+							pieceImages[i].pixels[4*(j*tempWidth+k)+3] = 0;
 						}
 					}
-					leftOut[rightType[i-1]].updatePixels();
-				}
-				//Right:
-				if ((i+1) % c == 0) {
-					goesRight[i] = false;
-					//It's a side piece. We're done here!
-				} else if (Math.random() < 0.5) {
-					//We're going to go in!
-					othercount = 0;
-					goesRight[i] = false;
-					var maxY = Math.round(knobH*5/2);
-					var minY = Math.round(knobH*3/2);
-					if (i >= c && goesDown[i-c] && downX[i-c] > 2*knobW) {
-						minY = knobH*2;
-					}
-					if (i < (r-1)*c && !goesDown[i] && downX[i] > 2*knobW) {
-						maxY = knobH*2;
-					}
-					rightY[i] = Math.round(p.random(minY,maxY));
-					rightType[i] = Math.floor(p.random(rightOut.length));
-					leftOut[rightType[i]].loadPixels();
-					for (var j = rightY[i]; j < rightY[i]+knobH; j++) {
-						for (var k = tempWidth-knobW*2; k < tempWidth-knobW; k++) {
-							pieceImages[i].pixels[4*(j*tempWidth+k)+3] = 255-leftOut[rightType[i]].pixels[othercount+3];
-							othercount+=4;
-						}
-					}
-					leftOut[rightType[i]].updatePixels();
-				} else {
-					//We're going to go out!
-					othercount = 0;
-					goesRight[i] = true;
-					var maxY = Math.round(knobH*5/2);
-					var minY = Math.round(knobH*3/2);
-					if (i >= c && goesDown[i-c+1] && downX[i-c+1] < 2*knobW) {
-						minY = 2*knobH;
-					}
-					rightY[i] = Math.round(p.random(minY,maxY));
-					rightType[i] = Math.floor(p.random(rightOut.length));
-					rightOut[rightType[i]].loadPixels();
-					for (var j = rightY[i]; j < rightY[i]+knobH; j++) {
+					for (var j = 0; j < pieceImageTallH; j++) {
 						for (var k = tempWidth-knobW; k < tempWidth; k++) {
-							pieceImages[i].pixels[4*(j*tempWidth+k)+3] = rightOut[rightType[i]].pixels[othercount+3];
-							othercount+=4;
+							pieceImages[i].pixels[4*(j*tempWidth+k)+3] = 0;
 						}
 					}
-					rightOut[rightType[i]].updatePixels();
+					for (var j = 0; j < knobH; j++) {
+						for (var k = knobW; k < tempWidth-knobW; k++) {
+							pieceImages[i].pixels[4*(j*tempWidth+k)+3] = 0;
+						}
+					}
+					for (var j = tempHeight-knobH; j < tempHeight; j++) {
+						for (var k = knobW; k < tempWidth-knobW; k++) {
+							pieceImages[i].pixels[4*(j*tempWidth+k)+3] = 0;
+						}
+					}
+					//Top:
+					if (i < c) {
+						//It's a top piece. We're done here!
+					} else if (goesDown[i-c]) {
+						//The one above us goes out, so we need to go in
+						othercount = 0;
+						bottomOut[downType[i-c]].loadPixels();
+						for (var j = knobH; j < knobH*2; j++) {
+							for (var k = downX[i-c]; k < downX[i-c]+knobW; k++) {
+								pieceImages[i].pixels[4*(j*tempWidth+k)+3] = 255-bottomOut[downType[i-c]].pixels[othercount+3];
+								othercount+=4;
+							}
+						}
+						bottomOut[downType[i-c]].updatePixels();
+					} else {
+						//The one above us goes in, so we need to go out
+						othercount = 0;
+						topOut[downType[i-c]].loadPixels();
+						for (var j = 0; j < knobH; j++) {
+							for (var k = downX[i-c]; k < downX[i-c]+knobW; k++) {
+								pieceImages[i].pixels[4*(j*tempWidth+k)+3] = topOut[downType[i-c]].pixels[othercount+3];
+								othercount+=4;
+							}
+						}
+						topOut[downType[i-c]].updatePixels();
+					}
+					//Bottom:
+					if (i >= (r-1)*c) {
+						goesDown[i] = false;
+						//It's a bottom piece. We're done here!
+					} else if (Math.random() < 0.5) {
+						//We're going to go in!
+						othercount = 0;
+						goesDown[i] = false;
+						var maxX = Math.round(knobW*5/2);
+						var minX = Math.round(knobW*3/2);
+						if (i % c != 0 && goesRight[i-1] && rightY[i-1] > 2*knobH) {
+							minX = knobW*2;
+						}
+						downX[i] = Math.round(p.random(minX,maxX));
+						downType[i] = Math.floor(p.random(topOut.length));
+						topOut[downType[i]].loadPixels();
+						for (var j = tempHeight-knobH*2; j < tempHeight-knobH; j++) {
+							for (var k = downX[i]; k < downX[i]+knobW; k++) {
+								pieceImages[i].pixels[4*(j*tempWidth+k)+3] = 255-topOut[downType[i]].pixels[othercount+3];
+								othercount+=4;
+							}
+						}
+						topOut[downType[i]].updatePixels();
+					} else {
+						//We're going to go out!
+						othercount = 0;
+						goesDown[i] = true;
+						downX[i] = Math.round(p.random(Math.round(knobW*3/2),Math.round(knobW*5/2)));
+						downType[i] = Math.floor(p.random(topOut.length));
+						bottomOut[downType[i]].loadPixels();
+						for (var j = tempHeight-knobH; j < tempHeight; j++) {
+							for (var k = downX[i]; k < downX[i]+knobW; k++) {
+								pieceImages[i].pixels[4*(j*tempWidth+k)+3] = bottomOut[downType[i]].pixels[othercount+3];
+								othercount+=4;
+							}
+						}
+						bottomOut[downType[i]].updatePixels();
+					}
+					//Left:
+					if (i % c == 0) {
+						//It's a side piece. We're done here!
+					} else if (goesRight[i-1]) {
+						//The one to the left of us goes out, so we need to go in
+						othercount = 0;
+						rightOut[rightType[i-1]].loadPixels();
+						for (var j = rightY[i-1]; j < rightY[i-1]+knobH; j++) {
+							for (var k = knobW; k < knobW*2; k++) {
+								pieceImages[i].pixels[4*(j*tempWidth+k)+3] = 255-rightOut[rightType[i-1]].pixels[othercount+3];
+								othercount+=4;
+							}
+						}
+						rightOut[rightType[i-1]].updatePixels();
+					} else {
+						//The one to the left of us goes in, so we need to go out
+						othercount = 0;
+						leftOut[rightType[i-1]].loadPixels();
+						for (var j = rightY[i-1]; j < rightY[i-1]+knobH; j++) {
+							for (var k = 0; k < knobW; k++) {
+								pieceImages[i].pixels[4*(j*tempWidth+k)+3] = leftOut[rightType[i-1]].pixels[othercount+3];
+								othercount+=4;
+							}
+						}
+						leftOut[rightType[i-1]].updatePixels();
+					}
+					//Right:
+					if ((i+1) % c == 0) {
+						goesRight[i] = false;
+						//It's a side piece. We're done here!
+					} else if (Math.random() < 0.5) {
+						//We're going to go in!
+						othercount = 0;
+						goesRight[i] = false;
+						var maxY = Math.round(knobH*5/2);
+						var minY = Math.round(knobH*3/2);
+						if (i >= c && goesDown[i-c] && downX[i-c] > 2*knobW) {
+							minY = knobH*2;
+						}
+						if (i < (r-1)*c && !goesDown[i] && downX[i] > 2*knobW) {
+							maxY = knobH*2;
+						}
+						rightY[i] = Math.round(p.random(minY,maxY));
+						rightType[i] = Math.floor(p.random(rightOut.length));
+						leftOut[rightType[i]].loadPixels();
+						for (var j = rightY[i]; j < rightY[i]+knobH; j++) {
+							for (var k = tempWidth-knobW*2; k < tempWidth-knobW; k++) {
+								pieceImages[i].pixels[4*(j*tempWidth+k)+3] = 255-leftOut[rightType[i]].pixels[othercount+3];
+								othercount+=4;
+							}
+						}
+						leftOut[rightType[i]].updatePixels();
+					} else {
+						//We're going to go out!
+						othercount = 0;
+						goesRight[i] = true;
+						var maxY = Math.round(knobH*5/2);
+						var minY = Math.round(knobH*3/2);
+						if (i >= c && goesDown[i-c+1] && downX[i-c+1] < 2*knobW) {
+							minY = 2*knobH;
+						}
+						rightY[i] = Math.round(p.random(minY,maxY));
+						rightType[i] = Math.floor(p.random(rightOut.length));
+						rightOut[rightType[i]].loadPixels();
+						for (var j = rightY[i]; j < rightY[i]+knobH; j++) {
+							for (var k = tempWidth-knobW; k < tempWidth; k++) {
+								pieceImages[i].pixels[4*(j*tempWidth+k)+3] = rightOut[rightType[i]].pixels[othercount+3];
+								othercount+=4;
+							}
+						}
+						rightOut[rightType[i]].updatePixels();
+					}
+					pieceImages[i].updatePixels();
 				}
-				pieceImages[i].updatePixels();
+			} else {
+				goesDown = p.getItem("goesDown",goesDown);
+				downX = p.getItem("downX",downX);
+				downType = p.getItem("downType",downType);
+				goesRight = p.getItem("goesRight",goesRight);
+				rightY = p.getItem("rightY",rightY);
+				rightType = p.getItem("rightType",rightType);
+				
+				for (var i = 0; i < r*c; i++) {
+					pieceImages[i] = p.createImage(pieceImageWideW,pieceImageTallH);
+					pieceImages[i].copy(puzzleImage2,(i%c)*pieceW,Math.floor(i/c)*pieceH,pieceImageWideW,pieceImageTallH,0,0,pieceImageWideW,pieceImageTallH);
+					//Start with border invisible:
+					var tempWidth = pieceImages[i].width;
+					var tempHeight = pieceImages[i].height;
+					var othercount = 0;
+					pieceImages[i].loadPixels();
+					for (var j = 0; j < pieceImageTallH; j++) {
+						for (var k = 0; k < knobW; k++) {
+							pieceImages[i].pixels[4*(j*tempWidth+k)+3] = 0;
+						}
+					}
+					for (var j = 0; j < pieceImageTallH; j++) {
+						for (var k = tempWidth-knobW; k < tempWidth; k++) {
+							pieceImages[i].pixels[4*(j*tempWidth+k)+3] = 0;
+						}
+					}
+					for (var j = 0; j < knobH; j++) {
+						for (var k = knobW; k < tempWidth-knobW; k++) {
+							pieceImages[i].pixels[4*(j*tempWidth+k)+3] = 0;
+						}
+					}
+					for (var j = tempHeight-knobH; j < tempHeight; j++) {
+						for (var k = knobW; k < tempWidth-knobW; k++) {
+							pieceImages[i].pixels[4*(j*tempWidth+k)+3] = 0;
+						}
+					}
+					//Top:
+					if (i < c) {
+						//It's a top piece. We're done here!
+					} else if (goesDown[i-c]) {
+						//The one above us goes out, so we need to go in
+						othercount = 0;
+						bottomOut[downType[i-c]].loadPixels();
+						for (var j = knobH; j < knobH*2; j++) {
+							for (var k = downX[i-c]; k < downX[i-c]+knobW; k++) {
+								pieceImages[i].pixels[4*(j*tempWidth+k)+3] = 255-bottomOut[downType[i-c]].pixels[othercount+3];
+								othercount+=4;
+							}
+						}
+						bottomOut[downType[i-c]].updatePixels();
+					} else {
+						//The one above us goes in, so we need to go out
+						othercount = 0;
+						topOut[downType[i-c]].loadPixels();
+						for (var j = 0; j < knobH; j++) {
+							for (var k = downX[i-c]; k < downX[i-c]+knobW; k++) {
+								pieceImages[i].pixels[4*(j*tempWidth+k)+3] = topOut[downType[i-c]].pixels[othercount+3];
+								othercount+=4;
+							}
+						}
+						topOut[downType[i-c]].updatePixels();
+					}
+					//Bottom:
+					if (i >= (r-1)*c) {
+						goesDown[i] = false;
+						//It's a bottom piece. We're done here!
+					} else if (!goesDown[i]) {
+						//We're going to go in!
+						othercount = 0;
+						topOut[downType[i]].loadPixels();
+						for (var j = tempHeight-knobH*2; j < tempHeight-knobH; j++) {
+							for (var k = downX[i]; k < downX[i]+knobW; k++) {
+								pieceImages[i].pixels[4*(j*tempWidth+k)+3] = 255-topOut[downType[i]].pixels[othercount+3];
+								othercount+=4;
+							}
+						}
+						topOut[downType[i]].updatePixels();
+					} else {
+						//We're going to go out!
+						othercount = 0;
+						goesDown[i] = true;
+						bottomOut[downType[i]].loadPixels();
+						for (var j = tempHeight-knobH; j < tempHeight; j++) {
+							for (var k = downX[i]; k < downX[i]+knobW; k++) {
+								pieceImages[i].pixels[4*(j*tempWidth+k)+3] = bottomOut[downType[i]].pixels[othercount+3];
+								othercount+=4;
+							}
+						}
+						bottomOut[downType[i]].updatePixels();
+					}
+					//Left:
+					if (i % c == 0) {
+						//It's a side piece. We're done here!
+					} else if (goesRight[i-1]) {
+						//The one to the left of us goes out, so we need to go in
+						othercount = 0;
+						rightOut[rightType[i-1]].loadPixels();
+						for (var j = rightY[i-1]; j < rightY[i-1]+knobH; j++) {
+							for (var k = knobW; k < knobW*2; k++) {
+								pieceImages[i].pixels[4*(j*tempWidth+k)+3] = 255-rightOut[rightType[i-1]].pixels[othercount+3];
+								othercount+=4;
+							}
+						}
+						rightOut[rightType[i-1]].updatePixels();
+					} else {
+						//The one to the left of us goes in, so we need to go out
+						othercount = 0;
+						leftOut[rightType[i-1]].loadPixels();
+						for (var j = rightY[i-1]; j < rightY[i-1]+knobH; j++) {
+							for (var k = 0; k < knobW; k++) {
+								pieceImages[i].pixels[4*(j*tempWidth+k)+3] = leftOut[rightType[i-1]].pixels[othercount+3];
+								othercount+=4;
+							}
+						}
+						leftOut[rightType[i-1]].updatePixels();
+					}
+					//Right:
+					if ((i+1) % c == 0) {
+						goesRight[i] = false;
+						//It's a side piece. We're done here!
+					} else if (!goesRight[i]) {
+						//We're going to go in!
+						othercount = 0;
+						leftOut[rightType[i]].loadPixels();
+						for (var j = rightY[i]; j < rightY[i]+knobH; j++) {
+							for (var k = tempWidth-knobW*2; k < tempWidth-knobW; k++) {
+								pieceImages[i].pixels[4*(j*tempWidth+k)+3] = 255-leftOut[rightType[i]].pixels[othercount+3];
+								othercount+=4;
+							}
+						}
+						leftOut[rightType[i]].updatePixels();
+					} else {
+						//We're going to go out!
+						othercount = 0;
+						rightOut[rightType[i]].loadPixels();
+						for (var j = rightY[i]; j < rightY[i]+knobH; j++) {
+							for (var k = tempWidth-knobW; k < tempWidth; k++) {
+								pieceImages[i].pixels[4*(j*tempWidth+k)+3] = rightOut[rightType[i]].pixels[othercount+3];
+								othercount+=4;
+							}
+						}
+						rightOut[rightType[i]].updatePixels();
+					}
+					pieceImages[i].updatePixels();
+				}
 			}
+			
 			
 			for (var i = 0; i < r*c; i++) {
 				pieces[i] = newPiece(p.random(0,canvasWidth-pieceW),p.random(0,canvasHeight-pieceH),i);
+			}
+			
+			if (loadingSaved) {
+				var pieceXs = p.getItem("pieceXs");
+				var pieceYs = p.getItem("pieceYs");
+				for (var i = 0; i < r*c; i++) {
+					pieces[i].setPosition(pieceXs[i],pieceYs[i]);
+				}
+				bgColor = p.getItem("bgColor");
+				setBGColor();
 			}
 			
 			for (var i = 0; i < 400; i++) {
@@ -691,10 +893,55 @@ function startSketch(){
 			showImage.update();
 			showImage.drawIt();
 			
+			savePuzzle.update();
+			savePuzzle.drawIt();
+			
 			if (showImage.pressed && currentlyMoving == -1) {
 				showingGoal = true;
 				showX = canvasWidth/2-puzzleImage.width/2;
 				showY = canvasHeight/2-puzzleImage.height/2;
+				//mouseIsReleased = false;
+			}
+			
+			if (savePuzzle.pressed && currentlyMoving == -1) {
+				p.storeItem("imageW",imageW);
+				p.storeItem("imageH",imageH);
+				p.storeItem("rows",r);
+				p.storeItem("columns",c);
+				try {
+					puzzleImage.loadPixels();
+					var testArray = [];
+					for (var i = 0; i < puzzleImage.pixels.length; i++) {
+						testArray.push(puzzleImage.pixels[i]);
+					}
+					p.storeItem("puzzleImagePixels",testArray);
+					imageTooLarge = false;
+					alert("Saved successfully! To load this puzzle, press load saved puzzle.")
+				}
+				catch (e) {
+					//console.log("nope. Not happening")
+					alert("Image too large to store. To load this puzzle, upload your image again, then press load saved puzzle.");
+					imageTooLarge = true;
+				}
+				p.storeItem("goesDown",goesDown);
+				p.storeItem("downX",downX);
+				p.storeItem("downType",downType);
+				p.storeItem("goesRight",goesRight);
+				p.storeItem("rightY",rightY);
+				p.storeItem("rightType",rightType);
+				p.storeItem("bgColor",bgColor);
+				var pieceXs = [];
+				var pieceYs = [];
+				for (var i = 0; i < pieces.length; i++) {
+					pieceXs.push(pieces[i].x);
+				}
+				for (var i = 0; i < pieces.length; i++) {
+					pieceYs.push(pieces[i].y);
+				}
+				p.storeItem("pieceXs",pieceXs);
+				p.storeItem("pieceYs",pieceYs);
+				setStored();
+				p.storeItem("imageTooLarge",imageTooLarge);
 				//mouseIsReleased = false;
 			}
 			
