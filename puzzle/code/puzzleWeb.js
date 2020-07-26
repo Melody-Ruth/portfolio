@@ -39,6 +39,21 @@ function setUp() {
 	var colorInput = document.getElementById("bgColor");
 	colorInput.defaultValue = '#0282c2';
 	bgColor = colorInput.value;
+	
+	var myCookie = document.cookie;
+	var valueString = "";
+	var importantPart = myCookie.indexOf("savedPuzzle");
+	if (importantPart != -1) {
+		importantPart += 12;//length of "savedPuzzle" + "="
+		if (myCookie.indexOf(";",importantPart) != -1) {
+			valueString = myCookie.substring(importantPart,myCookie.indexOf(";",importantPart));
+		} else {
+			valueString = myCookie.substring(importantPart,myCookie.length);
+		}
+		savedPuzzle = valueString;
+	} else {
+		savedPuzzle = "false";
+	}
 };
 
 function handleSizeInput() {
