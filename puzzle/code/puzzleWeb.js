@@ -39,22 +39,6 @@ function setUp() {
 	var colorInput = document.getElementById("bgColor");
 	colorInput.defaultValue = '#0282c2';
 	bgColor = colorInput.value;
-	
-	var myCookie = document.cookie;
-	var valueString = "";
-	var importantPart = myCookie.indexOf("savedPuzzle");
-	if (importantPart != -1) {
-		importantPart += 12;//length of "savedPuzzle" + "="
-		if (myCookie.indexOf(";",importantPart) != -1) {
-			valueString = myCookie.substring(importantPart,myCookie.indexOf(";",importantPart));
-		} else {
-			valueString = myCookie.substring(importantPart,myCookie.length);
-		}
-		savedPuzzle = valueString;
-	} else {
-		savedPuzzle = "false";
-		document.cookie = "savedPuzzle=false; expires=Sat, 25 July 2020 09:32:00 PST; sameSite=Strict; path=/";
-	}
 };
 
 function handleSizeInput() {
@@ -107,7 +91,7 @@ function loadPuzzle() {
 function setStored() {
 	savedPuzzle = "true";
 	var d = new Date();
-	d.setTime(d.getTime() + (1*24*60*60*1000));
+	d.setTime(d.getTime() + (90*24*60*60*1000));
 	var expires = "expires="+ d.toUTCString();
 	document.cookie = "savedPuzzle=true; expires="+expires/*Sat, 25 July 2020 09:55:00 PST*/+"; sameSite=Strict; path=/";
 }

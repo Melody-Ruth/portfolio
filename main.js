@@ -1,5 +1,6 @@
 var onProjectButton = false;
 var onDropDown = false;
+var okayedCookie;
 
 function onHomeHover() {
 	var home = document.getElementById("HomeButton");
@@ -91,4 +92,37 @@ function gingerbreadClicked() {
 }
 function EoMClicked() {
 	document.location = 'elements_of_magic/code/Elements_of_Magic.htm';
+}
+
+function okCookieButton() {
+	var cookieDiv = document.getElementById("cookieDiv");
+	cookieDiv.style.display = "none";
+	var d = new Date();
+	d.setTime(d.getTime() + (182*24*60*60*1000));
+	var expires = "expires="+ d.toUTCString();
+	document.cookie = "okayedCookies=true; expires="+expires/*Sat, 25 July 2020 09:55:00 PST*/+"; sameSite=Strict; path=/";
+	okayedCookie = "true";
+}
+
+function doSetUp() {
+	var myCookie = document.cookie;
+	var valueString = "";
+	var importantPart = myCookie.indexOf("okayedCookies");
+	if (importantPart != -1) {
+		importantPart += 14;//length of "okayedCookies" + "="
+		if (myCookie.indexOf(";",importantPart) != -1) {
+			valueString = myCookie.substring(importantPart,myCookie.indexOf(";",importantPart));
+		} else {
+			valueString = myCookie.substring(importantPart,myCookie.length);
+		}
+		okayedCookie = valueString;
+	}
+	if (okayedCookie == "true") {
+		var cookieDiv = document.getElementById("cookieDiv");
+		cookieDiv.style.display = "none";
+	}
+}
+
+function learnMoreCookieButton() {
+	document.location = 'cookiePage/code/cookiePage.htm';
 }

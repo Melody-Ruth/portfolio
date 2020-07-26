@@ -13,6 +13,7 @@
 	--blue4: #005fad;
 	--tan1: #faf8ed;
 	--tan2: #faf5d4;
+	--tan3:#302e13;
 }
 .Button {
 	border: none;
@@ -20,7 +21,7 @@
 	font-family:"Helvetica"
 }
 .text {
-	color:#302e13;
+	color:var(--tan3);
 	font-family:"Helvetica";
 	font-size:16px;
 }
@@ -156,4 +157,25 @@
 }
 
 .footer {
+}
+#cookieDiv {
+	background-color:rgba(48, 46, 19, 0.75);
+	position:fixed;
+	width:100%;
+	bottom:0px;
+	left:0px;
+}
+#cookiesText {
+	padding:20px;
+	color:white;
+	font-size:20px;
+}
+.cookieTextThings {
+	display:inline-block;
+}
+.cookieButton {
+	background-color:var(--tan3);
+	font-size:20px;
+	color:white;
+	cursor:pointer;
 }

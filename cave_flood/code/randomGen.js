@@ -2208,8 +2208,13 @@ var drawSettings = function() {
     ranGen.drawIt();
     ranGen.update();
     if (ranGen.pressed) {
-    	randomGen = !randomGen;
-    	storeItem("randomGen",randomGen);
+		if (typeof okayedCookie == 'undefined' || okayedCookie != "true") {
+			alert("Please accept the use of cookies to use this feature.");
+			ranGen.on = !ranGen.on;
+		} else {
+			randomGen = !randomGen;
+    		storeItem("randomGen",randomGen);
+		}
     }
     
     if (backSettings.pressed) {

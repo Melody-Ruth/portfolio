@@ -902,45 +902,49 @@ function startSketch(loadingSaved){
 			}
 			
 			if (savePuzzle.pressed && currentlyMoving == -1) {
-				p.storeItem("imageW",imageW);
-				p.storeItem("imageH",imageH);
-				p.storeItem("rows",r);
-				p.storeItem("columns",c);
-				try {
-					puzzleImage.loadPixels();
-					var testArray = [];
-					for (var i = 0; i < puzzleImage.pixels.length; i++) {
-						testArray.push(puzzleImage.pixels[i]);
+				if (typeof okayedCookie == 'undefined' || okayedCookie != "true") {
+					alert("Please accept the use of cookies to use this feature.");
+				} else {
+					p.storeItem("imageW",imageW);
+					p.storeItem("imageH",imageH);
+					p.storeItem("rows",r);
+					p.storeItem("columns",c);
+					try {
+						puzzleImage.loadPixels();
+						var testArray = [];
+						for (var i = 0; i < puzzleImage.pixels.length; i++) {
+							testArray.push(puzzleImage.pixels[i]);
+						}
+						p.storeItem("puzzleImagePixels",testArray);
+						imageTooLarge = false;
+						alert("Saved successfully! To load this puzzle, press load saved puzzle.")
 					}
-					p.storeItem("puzzleImagePixels",testArray);
-					imageTooLarge = false;
-					alert("Saved successfully! To load this puzzle, press load saved puzzle.")
+					catch (e) {
+						//console.log("nope. Not happening")
+						alert("Image too large to store. To load this puzzle, upload your image again, then press load saved puzzle.");
+						imageTooLarge = true;
+					}
+					p.storeItem("goesDown",goesDown);
+					p.storeItem("downX",downX);
+					p.storeItem("downType",downType);
+					p.storeItem("goesRight",goesRight);
+					p.storeItem("rightY",rightY);
+					p.storeItem("rightType",rightType);
+					p.storeItem("bgColor",bgColor);
+					var pieceXs = [];
+					var pieceYs = [];
+					for (var i = 0; i < pieces.length; i++) {
+						pieceXs.push(pieces[i].x);
+					}
+					for (var i = 0; i < pieces.length; i++) {
+						pieceYs.push(pieces[i].y);
+					}
+					p.storeItem("pieceXs",pieceXs);
+					p.storeItem("pieceYs",pieceYs);
+					setStored();
+					p.storeItem("imageTooLarge",imageTooLarge);
+					//mouseIsReleased = false;
 				}
-				catch (e) {
-					//console.log("nope. Not happening")
-					alert("Image too large to store. To load this puzzle, upload your image again, then press load saved puzzle.");
-					imageTooLarge = true;
-				}
-				p.storeItem("goesDown",goesDown);
-				p.storeItem("downX",downX);
-				p.storeItem("downType",downType);
-				p.storeItem("goesRight",goesRight);
-				p.storeItem("rightY",rightY);
-				p.storeItem("rightType",rightType);
-				p.storeItem("bgColor",bgColor);
-				var pieceXs = [];
-				var pieceYs = [];
-				for (var i = 0; i < pieces.length; i++) {
-					pieceXs.push(pieces[i].x);
-				}
-				for (var i = 0; i < pieces.length; i++) {
-					pieceYs.push(pieces[i].y);
-				}
-				p.storeItem("pieceXs",pieceXs);
-				p.storeItem("pieceYs",pieceYs);
-				setStored();
-				p.storeItem("imageTooLarge",imageTooLarge);
-				//mouseIsReleased = false;
 			}
 			
 			if (onAButton) {
