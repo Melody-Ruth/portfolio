@@ -31,14 +31,20 @@
 </div>
 <div style="clear: both;"></div>
 <p class="text spacing">
-&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;The biggest challenge for this project was rendering the objects.
+I calculate which faces of each object to show, what the light level will be on each face based on the position of the "sun," and what order to draw the objects in.
+I used the painter's algorithm for the latter.
+This unfortunately sometimes gives the wrong result for ordering the objects, so I considered switching to rasterization, but preliminary tests showed that it would be too laggy for this platform.
+Another challenge was collision detection. For collision purposes, the player is represented by a line from their "eyes" to their "feet." I wrote a method to detect collision between the player and a convex 3D shape.
+As part of this program I wrote methods to construct 3D shapes such as regular prisms, approximated spheres, and the "egg" shapes of golden eggs players can collect.
 </p>
 </div>
 <div id="rightColumn">
 <div id="instructions" class="spacing">
 <h4 class="text spacing">Instructions:</h4>
 <p class="text spacing">&nbsp;&nbsp;&nbsp;&nbsp;
-Up arrow key to move forward. Down arrow key to move back. Left and right arrow keys to turn. Space to jump. Use the mouse to look around. Get coins to increase your score. If you fall too far you lose. When the sun sets the game is over.
+Up arrow key to move forward. Down arrow key to move back. Left and right arrow keys to turn. Space to jump. Use the mouse to look around. Get coins to increase your score. 
+Clouds will gradually disappear while you are standing on them. If you fall too far you lose. When the sun sets the game is over. Start by climbing the beanstalk (you can jump from leaf to leaf).
 </p>
 </div>
 <div id="sourceCodeDiv" class="spacing">
