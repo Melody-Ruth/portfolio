@@ -92,6 +92,9 @@ function gingerbreadClicked() {
 function EoMClicked() {
 	document.location = '../../elements_of_magic/code/Elements_of_Magic.htm';
 }
+function beanClicked() {
+	document.location = '../../beanstalk/code/boxes.htm';
+}
 
 function okCookieButton() {
 	var cookieDiv = document.getElementById("cookieDiv");
