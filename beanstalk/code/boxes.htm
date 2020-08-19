@@ -11,7 +11,7 @@
 <script type="text/javascript" src="../../resources/jquery.js"></script>
 <script src="../../jqueryScripts.js" type="text/JavaScript"></script>
 <script type="text/javascript" src="../../resources/p5.js"></script>
-<script type="text/javascript" src="boxes.js"></script>
+<script type="text/javascript" src="testingShapes.js"></script>
 <script src="../../menu.js" type="text/JavaScript"></script>
 
 </head>
@@ -32,9 +32,9 @@
 <div style="clear: both;"></div>
 <p class="text spacing">
 &nbsp;&nbsp;&nbsp;&nbsp;The biggest challenge for this project was rendering the objects.
-I calculate which faces of each object to show, what the light level will be on each face based on the position of the "sun," and what order to draw the objects in.
+I calculate which faces of each object to show, what the light level will be on each face based on the position of the "sun," and what order to draw the objects.
 I used the painter's algorithm for the latter.
-This unfortunately sometimes gives the wrong result for ordering the objects, so I considered switching to rasterization, but preliminary tests showed that it would be too laggy for this platform.
+This unfortunately sometimes gives the wrong result for ordering the objects, so I considered switching to rasterization, but preliminary tests showed that it would cause too much lag on this platform.
 Another challenge was collision detection. For collision purposes, the player is represented by a line from their "eyes" to their "feet." I wrote a method to detect collision between the player and a convex 3D shape.
 As part of this program I wrote methods to construct 3D shapes such as regular prisms, approximated spheres, and the "egg" shapes of golden eggs players can collect.
 </p>

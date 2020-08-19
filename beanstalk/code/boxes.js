@@ -18,6 +18,9 @@ var mouseIsHeld = false;
 
 function keyPressed() {
 	keyIsPressed = true;
+	//if (key == ' ') {
+		return false;
+	//}
 }
 
 function keyReleased() {
@@ -1839,6 +1842,101 @@ class Leaf extends Shape {
 	}
 }
 
+class Egg extends Shape {
+	constructor(x,y,z,a,b,s,pointyPower,value) {
+		super();
+		
+		this.type = "Egg";
+		this.exists = true;
+		
+		//Set up vertices
+		this.v = [];
+		var currY;
+		var currR;
+		//Add base
+		currY = b * Math.cos(Math.PI) + y;
+		this.v.push(new Vertex(x, currY, z));
+		for (var t = 1 - 1 / s; t > 0; t -= 1 / s) {
+			currR = a * Math.sin(Math.PI * Math.pow(t,pointyPower));
+			currY = b * Math.cos(Math.PI * t) + y;
+			//console.log(currY);
+			
+			for (var j = 0; j < s; j++) {
+				/*if (t > .999) {
+					console.log(x + currR * Math.cos(j * 2 * Math.PI / s), currY, z + currR * Math.sin(j * 2 * Math.PI / s));
+				}*/
+				var testX = x + currR * Math.cos(j * 2 * Math.PI / s);
+				var testY = currY;
+				var testZ = z + currR * Math.sin(j * 2 * Math.PI / s);
+				this.v.push(new Vertex(x + currR * Math.cos(j * 2 * Math.PI / s), currY, z + currR * Math.sin(j * 2 * Math.PI / s)));
+			}
+		}
+		//Add tip
+		currY = b * Math.cos(Math.PI * 0) + y;
+		this.v.push(new Vertex(x, currY, z));
+		
+		this.f = [];//faces
+		/*
+		//base
+		for (var j = 0; j < s - 1; j++) {
+			this.f.push(new Face([this.v[0],this.v[(0 + 1) * s + j + 1 + 1],this.v[(0 + 1) * s + j + 1]],1,[255,180,180],[255,0,0],0.7));
+		}
+		this.f.push(new Face([this.v[0],this.v[(0 + 1) * s + 1],this.v[(0 + 1) * s + (s - 1) + 1]],1,[255,180,180],[255,0,0],0.7));
+		for (var i = 0; i < s - 2; i++) {
+			for (var j = 0; j < s - 1; j++) {
+				this.f.push(new Face([this.v[i * s + j + 1],this.v[i * s + j + 1 + 1],this.v[(i + 1) * s + j + 1 + 1],this.v[(i + 1) * s + j + 1]],1,[255,180,180],[255,0,0],0.7));
+			}
+			this.f.push(new Face([this.v[i * s + (s - 1) + 1],this.v[i * s + 1],this.v[(i + 1) * s + 1],this.v[(i + 1) * s + (s - 1) + 1]],1,[255,180,180],[255,0,0],0.7));
+		}
+		//tip
+		for (var j = 0; j < s - 1; j++) {
+			this.f.push(new Face([this.v[(s - 2) * s + j + 1],this.v[(s - 2) * s + j + 1 + 1],this.v[this.v.length-1]],1,[255,180,180],[255,0,0],0.7));
+		}
+		this.f.push(new Face([this.v[(s - 2) * s + (s - 1) + 1],this.v[(s - 2) * s + 1],this.v[this.v.length-1]],1,[255,180,180],[255,0,0],0.7));
+		*/
+		//base
+		var randomR;
+		for (var j = 0; j < s - 1; j++) {
+			randomR = 255*Math.random();
+			this.f.push(new Face([this.v[0],this.v[j + 1 + 1],this.v[j + 1]],1,[randomR,randomR,randomR],[randomR/2,randomR/2,randomR/2],0.7));
+		}
+		randomR = 255*Math.random();
+		this.f.push(new Face([this.v[0],this.v[1],this.v[(s - 1) + 1]],1,[randomR,randomR,randomR],[randomR/2,randomR/2,randomR/2],0.7));
+		for (var i = 0; i < s - 2; i++) {
+			for (var j = 0; j < s - 1; j++) {
+				randomR = 255*Math.random();
+				this.f.push(new Face([this.v[i * s + j + 1],this.v[i * s + j + 1 + 1],this.v[(i + 1) * s + j + 1 + 1],this.v[(i + 1) * s + j + 1]],1,[randomR,randomR,randomR],[randomR/2,randomR/2,randomR/2],0.7));
+			}
+			randomR = 255*Math.random();
+			this.f.push(new Face([this.v[i * s + (s - 1) + 1],this.v[i * s + 1],this.v[(i + 1) * s + 1],this.v[(i + 1) * s + (s - 1) + 1]],1,[randomR,randomR,randomR],[randomR/2,randomR/2,randomR/2],0.7));
+		}
+		//tip
+		for (var j = 0; j < s - 1; j++) {
+			randomR = 255*Math.random();
+			this.f.push(new Face([this.v[(s - 2) * s + j + 1],this.v[(s - 2) * s + j + 1 + 1],this.v[this.v.length-1]],1,[randomR,randomR,randomR],[randomR/2,randomR/2,randomR/2],0.7));
+		}
+		randomR = 255*Math.random();
+		this.f.push(new Face([this.v[(s - 2) * s + (s - 1) + 1],this.v[(s - 2) * s + 1],this.v[this.v.length-1]],1,[randomR,randomR,randomR],[randomR/2,randomR/2,randomR/2],0.7));
+		
+		this.center = [];
+		this.center[0] = x;
+		this.center[1] = z;
+		
+		for (var i = 0; i < this.f.length; i++) {
+			this.f[i].updateNormal();
+		}
+		
+		this.value = value;
+	}
+	respondToPlayer(printing) {
+		super.respondToPlayer();
+		if (super.checkCollision()) {
+			this.exists = false;
+			player.score += this.value;
+		}
+	}
+}
+
 var test = new Box(-600,0,800,350,250,80);
 //var testCloud = new BoxCloud(-600,200,800,350,250,80);
 //var testCloud2 = new BoxCloud(-50,1000,-150,150,250,80);
@@ -1855,6 +1953,9 @@ clouds.push(new BoxCloud(-50,1100,-750,150,200,80));
 clouds.push(new BoxCloud(-50,1140,-1050,150,250,80));
 clouds.push(new BoxCloud(-25,1140,-1200,100,100,80));
 clouds.push(new BoxCloud(-25,1160,-1350,100,100,80));
+clouds.push(new BoxCloud(-25,1180,-1500,100,100,80));
+
+var myEgg = new Egg(-40,1200,-1460,50,80,1.2,50);
 
 var myOcts = [];
 
@@ -1894,6 +1995,7 @@ for (var i = 0; i < test.f.length; i++) {
 
 var allShapes = [];
 allShapes.push([beanstalk.v[0].z,beanstalk]);
+allShapes.push([myEgg.v[0].z,myEgg]);
 
 for (var i = 0; i < leaves.length; i++) {
 	allShapes.push([leaves[i].v[0].z,leaves[i]]);
@@ -1931,7 +2033,7 @@ var bStep = (endB - currB) / 14000;
 
 function draw() {
 	//noLoop();
-	if (counter > 14000) {
+	if (counter > 14000 && !player.died) {
 		background(255,255,255);
 		fill(0,0,0);
 		textSize(25);

@@ -18,6 +18,7 @@ var mouseIsHeld = false;
 
 function keyPressed() {
 	keyIsPressed = true;
+	return false;
 }
 
 function keyReleased() {
@@ -2039,6 +2040,7 @@ clouds.push(new BoxCloud(-50,1100,-750,150,200,80));
 clouds.push(new BoxCloud(-50,1140,-1050,150,250,80));
 clouds.push(new BoxCloud(-25,1140,-1200,100,100,80));
 clouds.push(new BoxCloud(-25,1160,-1350,100,100,80));
+clouds.push(new BoxCloud(-25,1180,-1500,100,100,80));
 
 var myOcts = [];
 
@@ -2076,17 +2078,17 @@ for (var i = 0; i < test.f.length; i++) {
 	test.f[i].updateLight();
 }
 
-var testEgg = new Egg(20,45,-50,30,50,11,1.2,20);
+var testEgg = new Egg(30,1350,-1450,30,50,11,1.2,100);
 testEgg.updateLight([232, 196, 79], [176, 136, 7]);
 
-var discoBall = new Egg(20,225,-50,30,30,15,1,10);
-discoBall.updateLight([255, 255, 255], [70, 70, 70]);
+//var discoBall = new Egg(20,225,-50,30,30,15,1,10);
+//discoBall.updateLight([255, 255, 255], [70, 70, 70]);
 
-var kiss = new Egg(20,20,-250,30,30,12,2.6,10);
-kiss.updateLight([130, 74, 18], [51, 28, 5]);
+//var kiss = new Egg(20,20,-250,30,30,12,2.6,10);
+//kiss.updateLight([130, 74, 18], [51, 28, 5]);
 
-var cone = new Egg(270,45,-50,25,50,11,2.2,20);
-cone.updateLight([255, 149, 43], [230, 115, 0]);
+//var cone = new Egg(270,45,-50,25,50,11,2.2,20);
+//cone.updateLight([255, 149, 43], [230, 115, 0]);
 
 /*for (var i = 0; i < testEgg.f.length; i++) {
 	if (!testEgg.f[i].checkInside([20,55,-50])) {
@@ -2099,23 +2101,23 @@ cone.updateLight([255, 149, 43], [230, 115, 0]);
 //console.log(, testEgg.f[20].checkInside(20,105,-50, true));
 
 var allShapes = [];
-//allShapes.push([beanstalk.v[0].z,beanstalk]);
+allShapes.push([beanstalk.v[0].z,beanstalk]);
 allShapes.push([testEgg.v[0].z,testEgg]);
-allShapes.push([discoBall.v[0].z,discoBall]);
-allShapes.push([kiss.v[0].z,kiss]);
-allShapes.push([cone.v[0].z,cone]);
+//allShapes.push([discoBall.v[0].z,discoBall]);
+//allShapes.push([kiss.v[0].z,kiss]);
+//allShapes.push([cone.v[0].z,cone]);
 
 
 for (var i = 0; i < leaves.length; i++) {
-	//allShapes.push([leaves[i].v[0].z,leaves[i]]);
+	allShapes.push([leaves[i].v[0].z,leaves[i]]);
 }
 
 for (var i = 0; i < clouds.length; i++) {
-	//allShapes.push([clouds[i].v[0].z,clouds[i]]);
+	allShapes.push([clouds[i].v[0].z,clouds[i]]);
 }
 
 for (var i = 0; i < coins.length; i++) {
-	//allShapes.push([coins[i].v[0].z,coins[i]]);
+	allShapes.push([coins[i].v[0].z,coins[i]]);
 }
 
 function shapeSort(a, b) {
@@ -2141,7 +2143,7 @@ var endB = 77;
 var bStep = (endB - currB) / 14000;
 
 function draw() {
-	noLoop();
+	//noLoop();
 	if (counter > 14000) {
 		background(255,255,255);
 		fill(0,0,0);
