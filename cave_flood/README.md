@@ -2,7 +2,7 @@
 All files in this folder were created by Melody Ruth and are licensed under [Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)](https://creativecommons.org/licenses/by-nc-sa/3.0/).
 
 ##### Description
-A game in which the player shoots arrows at moving targets in order to get the highest score possible with a limited number of arrows.
+A game in which the player navigates a system of flooding caves in order to get the highest score and fastest time possible by quickly collecting crystals and escaping the caves.
 
 ##### File Structure
 The code folder contains the html, css, and javascript files needed to run the game, as well as outdated code.
